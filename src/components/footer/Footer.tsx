@@ -15,8 +15,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           {/* Brand Column */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-nb-off-white p-3 rounded-lg inline-block">
-              <Logo variant="full" />
+            <div>
+              <Logo variant="white" />
             </div>
             <p className="text-xl sm:text-2xl font-semibold text-nb-white tracking-tight max-w-sm">
               Where Ideas Find Their Code.
