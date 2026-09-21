@@ -5,6 +5,7 @@ import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/footer/Footer";
 import CustomCursor from "@/components/interactions/CustomCursor";
 import SmoothScroll from "@/components/interactions/SmoothScroll";
+import ScrollToTop from "@/components/interactions/ScrollToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -88,6 +89,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1 w-full">{children}</main>
           <Footer />
+          <ScrollToTop />
         </SmoothScroll>
       </body>
     </html>
