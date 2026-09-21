@@ -26,10 +26,10 @@ const PROJECT_STAGES = [
 
 const BUDGET_RANGES = [
   "Flexible / Discovery",
-  "< $10,000",
-  "$10,000 - $25,000",
-  "$25,000 - $50,000",
-  "$50,000+"
+  "< ₹50,000",
+  "₹50,000 - ₹2,00,000",
+  "₹2,00,000 - ₹5,00,000",
+  "₹5,00,000+"
 ];
 
 export default function ContactPage() {
