@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nb-orange: #FF6A00;
+  --nb-deep-orange: #D94F00;
+  --nb-black: #0B0B0B;
+  --nb-soft-black: #151515;
+  --nb-graphite: #222222;
+  --nb-off-white: #F5F3EE;
+  --nb-white: #FFFFFF;
+  --nb-muted: #77736D;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--nb-off-white);
+  color: var(--nb-black);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  scroll-behavior: auto; /* Managed by Lenis */
+}
+
+/* Custom Selection */
+::selection {
+  background-color: var(--nb-orange);
+  color: #FFFFFF;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (min-width: 1024px) and (pointer: fine) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor input,
+  body.has-custom-cursor select,
+  body.has-custom-cursor textarea {
+    cursor: none;
+  }
+}
+
+/* Micro Grid Backgrounds */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-grid-pattern-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-blueprint-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 106, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 106, 0, 0.07) 1px, transparent 1px);
+}
+
+/* Signal Glow Utilities */
+.signal-glow-sm {
+  box-shadow: 0 0 15px rgba(255, 106, 0, 0.35);
+}
+
+.signal-glow-lg {
+  box-shadow: 0 0 35px rgba(255, 106, 0, 0.45);
+}
+
+.text-signal-glow {
+  text-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
+}
+
+/* Typography Rhythm */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-grotesk), sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.font-mono-tech {
+  font-family: var(--font-jetbrains-mono), monospace;
+  letter-spacing: -0.01em;
+}
+
+/* Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--nb-off-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5D1C8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nb-orange);
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
