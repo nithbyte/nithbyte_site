@@ -6,6 +6,8 @@ import Footer from "@/components/footer/Footer";
 import CustomCursor from "@/components/interactions/CustomCursor";
 import SmoothScroll from "@/components/interactions/SmoothScroll";
 import ScrollToTop from "@/components/interactions/ScrollToTop";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import NithByteAssistant from "@/components/assistant/NithByteAssistant";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -67,9 +69,13 @@ export const metadata: Metadata = {
     images: ["/images/nithbyte-logo.png"],
   },
   icons: {
-    icon: "/images/nithbyte-logo.png",
-    shortcut: "/images/nithbyte-logo.png",
-    apple: "/images/nithbyte-logo.png",
+    icon: [
+      { url: "/images/image.png" },
+      { url: "/images/image.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/image.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/images/image.png",
+    apple: "/images/image.png",
   },
 };
 
@@ -83,14 +89,17 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-nb-off-white text-nb-black antialiased selection:bg-nb-orange selection:text-white min-h-screen flex flex-col justify-between">
-        <SmoothScroll>
-          <CustomCursor />
-          <Navbar />
-          <main className="flex-1 w-full">{children}</main>
-          <Footer />
-          <ScrollToTop />
-        </SmoothScroll>
+      <body className="bg-nb-off-white text-nb-black dark:bg-nb-black dark:text-nb-off-white antialiased selection:bg-nb-orange selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
+        <ThemeProvider>
+          <SmoothScroll>
+            <CustomCursor />
+            <Navbar />
+            <main className="flex-1 w-full">{children}</main>
+            <Footer />
+            <ScrollToTop />
+            <NithByteAssistant />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

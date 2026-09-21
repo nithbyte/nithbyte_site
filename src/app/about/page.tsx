@@ -45,12 +45,12 @@ export default function AboutPage() {
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="border-b border-black/10 pb-16 space-y-6 max-w-4xl">
+        <div className="border-b border-black/10 dark:border-white/10 pb-16 space-y-6 max-w-4xl">
           <SignalBadge label="ABOUT NITHBYTE" tag="COMPANY" />
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black leading-[1.02]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
             An independent engineering company built for <span className="text-nb-orange">product longevity.</span>
           </h1>
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 font-light leading-relaxed">
+          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
             NithByte is a technology-driven digital solutions company that designs, builds, and grows digital products for modern international businesses.
           </p>
         </div>
@@ -63,21 +63,21 @@ export default function AboutPage() {
             <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase tracking-widest">
               WHO WE ARE
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-nb-black tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               Where technical precision meets product intuition.
             </h2>
           </div>
 
-          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-nb-graphite/90 leading-relaxed font-normal">
+          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-nb-graphite/90 dark:text-nb-muted leading-relaxed font-normal">
             <p>
               The digital ecosystem is saturated with generic agency templates, bloated software layers, and superficial marketing promises. NithByte was founded with a singular conviction: that modern businesses deserve high-performance digital products engineered around their actual operational logic.
             </p>
             <p>
               We operate at the intersection of full-stack engineering, tactile product design, and practical machine intelligence. Our work spans custom web applications, mobile platforms, headless commerce infrastructure, and autonomous workflow pipelines.
             </p>
-            <div className="p-6 rounded-2xl bg-nb-white border border-black/10 font-mono-tech text-xs space-y-2">
+            <div className="p-6 rounded-2xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 font-mono-tech text-xs space-y-2">
               <span className="text-nb-orange font-bold">CORE IDENTITY</span>
-              <p className="text-nb-graphite">
+              <p className="text-nb-graphite dark:text-nb-off-white">
                 &quot;NITH&quot; represents unified technical leadership. &quot;BYTE&quot; represents digital computing and software systems. Together, NithByte is where ideas find their code.
               </p>
             </div>
@@ -119,7 +119,7 @@ export default function AboutPage() {
 
       {/* Technology Philosophy */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-8">
+        <div className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
           <SectionHeader
             badgeLabel="TECHNOLOGY PHILOSOPHY"
             badgeTag="STANDARDS"
@@ -128,21 +128,21 @@ export default function AboutPage() {
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono-tech text-xs">
-            <div className="p-6 rounded-2xl bg-nb-off-white border border-black/5 space-y-2">
+            <div className="p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2">
               <span className="text-nb-orange font-bold text-sm">STRICT STATIC TYPING</span>
-              <p className="text-nb-graphite/80 leading-relaxed">
+              <p className="text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
                 Complete TypeScript type safety across frontend, backend, and API contracts prevents runtime bugs.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-nb-off-white border border-black/5 space-y-2">
+            <div className="p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2">
               <span className="text-nb-orange font-bold text-sm">EDGE-NATIVE HYDRATION</span>
-              <p className="text-nb-graphite/80 leading-relaxed">
+              <p className="text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
                 Pre-rendered HTML distributed to global CDNs guarantees lightning-fast first contentful paint.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-nb-off-white border border-black/5 space-y-2">
+            <div className="p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2">
               <span className="text-nb-orange font-bold text-sm">ZERO DEPENDENCY BLOAT</span>
-              <p className="text-nb-graphite/80 leading-relaxed">
+              <p className="text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
                 Carefully audited dependency trees ensure featherweight bundle sizes and ironclad security.
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
 
       {/* Call to Action */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 text-center space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black dark:text-nb-white">
           Ready to engineer something remarkable?
         </h2>
         <p className="text-base sm:text-lg text-nb-muted max-w-xl mx-auto">

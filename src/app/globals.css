@@ -24,6 +24,11 @@ html {
   scroll-behavior: auto; /* Managed by Lenis */
 }
 
+html.dark {
+  background-color: var(--nb-black);
+  color: var(--nb-off-white);
+}
+
 /* Custom Selection */
 ::selection {
   background-color: var(--nb-orange);
@@ -103,6 +108,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: var(--nb-orange);
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--nb-black);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
   background: var(--nb-orange);
 }
 

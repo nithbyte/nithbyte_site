@@ -39,7 +39,7 @@ export default function ServiceDetailPage({ params }: Props) {
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="space-y-6 max-w-4xl border-b border-black/10 pb-16">
+        <div className="space-y-6 max-w-4xl border-b border-black/10 dark:border-white/10 pb-16">
           <div className="flex items-center gap-4">
             <Link
               href="/services"
@@ -51,11 +51,11 @@ export default function ServiceDetailPage({ params }: Props) {
             <SignalBadge label={service.tag} tag={`0${service.number}`} />
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black leading-[1.02]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
             {service.heroHeadline}
           </h1>
 
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 font-light leading-relaxed">
+          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
             {service.fullDesc}
           </p>
 
@@ -85,14 +85,14 @@ export default function ServiceDetailPage({ params }: Props) {
           {service.capabilities.map((cap, i) => (
             <div
               key={cap.name}
-              className="p-8 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-3"
+              className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-3"
             >
               <div className="flex items-center justify-between font-mono-tech text-xs">
                 <span className="text-nb-orange font-bold">MODULE 0{i + 1}</span>
                 <span className="text-nb-muted">PRODUCTION STANDARD</span>
               </div>
-              <h3 className="text-xl font-bold text-nb-black tracking-tight">{cap.name}</h3>
-              <p className="text-sm text-nb-graphite/80 leading-relaxed">{cap.description}</p>
+              <h3 className="text-xl font-bold text-nb-black dark:text-nb-white tracking-tight">{cap.name}</h3>
+              <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">{cap.description}</p>
             </div>
           ))}
         </div>
@@ -130,27 +130,27 @@ export default function ServiceDetailPage({ params }: Props) {
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               Verified Deliverables
             </h3>
             <div className="space-y-3 font-mono-tech text-xs">
               {service.deliverables.map((del) => (
                 <div
                   key={del}
-                  className="p-4 rounded-xl bg-nb-white border border-black/10 flex items-center gap-3"
+                  className="p-4 rounded-xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 flex items-center gap-3"
                 >
                   <CheckCircle2 className="w-4 h-4 text-nb-orange flex-shrink-0" />
-                  <span className="text-nb-black font-medium">{del}</span>
+                  <span className="text-nb-black dark:text-nb-off-white font-medium">{del}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               Technology Ecosystem
             </h3>
-            <div className="p-8 rounded-3xl bg-nb-white border border-black/10 space-y-4 font-mono-tech text-xs">
+            <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-4 font-mono-tech text-xs">
               <div className="flex items-center gap-2 text-nb-orange font-bold">
                 <Terminal className="w-4 h-4" />
                 <span>RECOMMENDED TOOLCHAIN</span>
@@ -159,7 +159,7 @@ export default function ServiceDetailPage({ params }: Props) {
                 {service.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 rounded-lg bg-nb-off-white border border-black/10 text-nb-black font-semibold"
+                    className="px-3 py-1.5 rounded-lg bg-nb-off-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-nb-black dark:text-nb-off-white font-semibold"
                   >
                     {tech}
                   </span>
@@ -172,7 +172,7 @@ export default function ServiceDetailPage({ params }: Props) {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 text-center space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black dark:text-nb-white">
           Ready to build with {service.title}?
         </h2>
         <div className="flex justify-center pt-2">

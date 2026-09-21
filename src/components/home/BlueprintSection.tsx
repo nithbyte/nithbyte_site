@@ -21,7 +21,7 @@ export default function BlueprintSection() {
   const project = PROJECTS[0]; // ALPS Cafe Nagercoil
 
   return (
-    <section className="py-24 sm:py-32 bg-nb-off-white relative border-b border-black/10 overflow-hidden">
+    <section className="py-24 sm:py-32 bg-nb-off-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <SectionHeader
           badgeLabel="BLUEPRINT TO REALITY"

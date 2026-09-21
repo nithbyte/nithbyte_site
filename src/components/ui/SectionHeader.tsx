@@ -28,16 +28,16 @@ export default function SectionHeader({
         <SignalBadge label={badgeLabel} tag={badgeTag} dark={dark} />
       </div>
       <h2
-        className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] ${
-          dark ? "text-nb-white" : "text-nb-black"
+        className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] transition-colors ${
+          dark ? "text-nb-white" : "text-nb-black dark:text-nb-white"
         }`}
       >
         {title}
       </h2>
       {description && (
         <p
-          className={`mt-4 text-base sm:text-lg md:text-xl font-normal leading-relaxed ${
-            dark ? "text-nb-muted" : "text-nb-graphite/80"
+          className={`mt-4 text-base sm:text-lg md:text-xl font-normal leading-relaxed transition-colors ${
+            dark ? "text-nb-muted" : "text-nb-graphite/80 dark:text-nb-muted"
           }`}
         >
           {description}

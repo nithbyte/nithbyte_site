@@ -10,7 +10,7 @@ import { ArrowUpRight, Lock, ExternalLink } from "lucide-react";
 
 export default function FeaturedWorkSection() {
   return (
-    <section className="py-24 sm:py-32 bg-nb-white relative border-b border-black/10">
+    <section className="py-24 sm:py-32 bg-nb-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <SectionHeader
@@ -20,7 +20,7 @@ export default function FeaturedWorkSection() {
             description="Explore our recent deployments and active client engineering architectures."
             className="mb-0 md:mb-0"
           />
-          <MagneticButton href="/work" variant="outline" size="md" cursorLabel="VIEW ALL">
+          <MagneticButton href="/work" variant="outline" size="md" cursorLabel="VIEW ALL" className="dark:text-nb-white dark:border-white/20 dark:hover:bg-white dark:hover:text-nb-black">
             View All Work
           </MagneticButton>
         </div>
@@ -33,7 +33,7 @@ export default function FeaturedWorkSection() {
               href={`/work/${project.slug}`}
               data-cursor="project"
               data-cursor-text="EXPLORE ↗"
-              className="group block rounded-3xl bg-nb-off-white border border-black/10 hover:border-nb-orange/50 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl relative flex flex-col justify-between"
+              className="group block rounded-3xl bg-nb-off-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 hover:border-nb-orange/50 dark:hover:border-nb-orange/50 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-xl relative flex flex-col justify-between"
             >
               {/* Card Media Preview Area */}
               <div className="relative aspect-[4/3] bg-nb-black overflow-hidden p-6 flex flex-col justify-between">
@@ -84,18 +84,18 @@ export default function FeaturedWorkSection() {
               <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-nb-black group-hover:text-nb-orange transition-colors">
+                    <h3 className="text-xl font-bold text-nb-black dark:text-nb-white group-hover:text-nb-orange dark:group-hover:text-nb-orange transition-colors">
                       {project.title}
                     </h3>
                     <ArrowUpRight className="w-4 h-4 text-nb-muted group-hover:text-nb-orange group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </div>
                   <p className="text-xs font-mono-tech text-nb-muted">{project.year}</p>
-                  <p className="text-xs text-nb-graphite/80 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-nb-graphite/80 dark:text-nb-muted leading-relaxed line-clamp-2">
                     {project.summary}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-black/5 flex items-center justify-between text-xs font-mono-tech text-nb-orange font-semibold">
+                <div className="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-xs font-mono-tech text-nb-orange font-semibold">
                   <span>VIEW ARCHITECTURE</span>
                   <span>→</span>
                 </div>

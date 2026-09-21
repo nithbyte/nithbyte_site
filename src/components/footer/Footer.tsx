@@ -3,6 +3,7 @@ import Link from "next/link";
 import Logo from "../ui/Logo";
 import OrangeSignal from "../interactions/OrangeSignal";
 import MagneticButton from "../interactions/MagneticButton";
+import { Instagram, Facebook } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -24,10 +25,31 @@ export default function Footer() {
             <p className="text-sm text-nb-muted leading-relaxed max-w-md">
               NithByte designs and engineers digital experiences, commerce platforms, and intelligent software systems for forward-thinking international businesses.
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center gap-4">
               <MagneticButton href="/contact" variant="primary" size="sm" cursorLabel="LET'S BUILD">
                 Start a Project
               </MagneticButton>
+
+              <div className="flex items-center gap-2 text-xs font-mono-tech">
+                <a
+                  href="https://www.instagram.com/nithbyte_official"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-full bg-white/5 hover:bg-nb-orange hover:text-white border border-white/10 text-nb-off-white/80 transition-all duration-200"
+                  aria-label="NithByte on Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61594737716582"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-full bg-white/5 hover:bg-nb-orange hover:text-white border border-white/10 text-nb-off-white/80 transition-all duration-200"
+                  aria-label="NithByte on Facebook"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
 

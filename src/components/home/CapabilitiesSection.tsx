@@ -82,7 +82,7 @@ export default function CapabilitiesSection() {
   const activeCap = CAPABILITIES.find((c) => c.id === selectedId) || CAPABILITIES[0];
 
   return (
-    <section className="py-24 sm:py-32 bg-nb-off-white relative border-b border-black/10">
+    <section className="py-24 sm:py-32 bg-nb-off-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <SectionHeader
           badgeLabel="CORE CAPABILITIES"
@@ -92,7 +92,7 @@ export default function CapabilitiesSection() {
         />
 
         {/* Interactive Capability Selector Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 p-1.5 bg-nb-white rounded-2xl border border-black/10 shadow-sm mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 p-1.5 bg-nb-white dark:bg-nb-soft-black rounded-2xl border border-black/10 dark:border-white/10 shadow-sm mb-8">
           {CAPABILITIES.map((item) => {
             const isSelected = item.id === selectedId;
             return (
@@ -101,14 +101,14 @@ export default function CapabilitiesSection() {
                 onClick={() => setSelectedId(item.id)}
                 className={`relative py-3.5 px-4 rounded-xl text-xs font-mono-tech tracking-wider uppercase font-bold transition-all duration-200 flex items-center justify-center gap-2 select-none ${
                   isSelected
-                    ? "bg-nb-black text-nb-white shadow-md shadow-black/20"
-                    : "text-nb-graphite hover:text-nb-orange hover:bg-black/5"
+                    ? "bg-nb-black text-nb-white shadow-md shadow-black/20 dark:bg-nb-orange dark:text-white"
+                    : "text-nb-graphite dark:text-nb-muted hover:text-nb-orange dark:hover:text-nb-orange hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
               >
                 {isSelected && (
                   <motion.span
                     layoutId="cap-active-indicator"
-                    className="w-2 h-2 rounded-full bg-nb-orange"
+                    className="w-2 h-2 rounded-full bg-nb-orange dark:bg-white"
                   />
                 )}
                 <span>{item.tag}</span>

@@ -39,7 +39,7 @@ export default function WorkDetailPage({ params }: Props) {
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="space-y-6 max-w-4xl border-b border-black/10 pb-16">
+        <div className="space-y-6 max-w-4xl border-b border-black/10 dark:border-white/10 pb-16">
           <div className="flex items-center gap-4">
             <Link
               href="/work"
@@ -51,7 +51,7 @@ export default function WorkDetailPage({ params }: Props) {
             <SignalBadge label={project.category} tag={project.year} />
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black leading-[1.02]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
             {project.title}
           </h1>
 
@@ -59,7 +59,7 @@ export default function WorkDetailPage({ params }: Props) {
             {project.tagline}
           </p>
 
-          <p className="text-base sm:text-lg text-nb-graphite/80 leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-lg text-nb-graphite/80 dark:text-nb-muted leading-relaxed max-w-3xl">
             {project.summary}
           </p>
 
@@ -69,7 +69,7 @@ export default function WorkDetailPage({ params }: Props) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black text-nb-white hover:bg-nb-orange transition-colors shadow-md"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black text-nb-white hover:bg-nb-orange transition-colors shadow-md dark:bg-nb-orange dark:hover:bg-nb-deep-orange"
               >
                 Visit Live Platform <ExternalLink className="w-4 h-4" />
               </a>
@@ -82,34 +82,34 @@ export default function WorkDetailPage({ params }: Props) {
       <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Challenge */}
-          <div className="p-8 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-3">
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-3">
             <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase">
               01 // THE CHALLENGE
             </span>
-            <h3 className="text-xl font-bold text-nb-black">Problem Context</h3>
-            <p className="text-sm text-nb-graphite/80 leading-relaxed">
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Problem Context</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
               {project.challenge}
             </p>
           </div>
 
           {/* Approach */}
-          <div className="p-8 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-3">
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-3">
             <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase">
               02 // THE APPROACH
             </span>
-            <h3 className="text-xl font-bold text-nb-black">Interaction Design</h3>
-            <p className="text-sm text-nb-graphite/80 leading-relaxed">
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Interaction Design</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
               {project.approach}
             </p>
           </div>
 
           {/* Engineering */}
-          <div className="p-8 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-3">
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-3">
             <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase">
               03 // THE ENGINEERING
             </span>
-            <h3 className="text-xl font-bold text-nb-black">Technical Execution</h3>
-            <p className="text-sm text-nb-graphite/80 leading-relaxed">
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Technical Execution</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
               {project.engineering}
             </p>
           </div>
@@ -148,27 +148,27 @@ export default function WorkDetailPage({ params }: Props) {
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               Key Platform Features
             </h3>
             <div className="space-y-3 font-mono-tech text-xs">
               {project.features.map((feat) => (
                 <div
                   key={feat}
-                  className="p-4 rounded-xl bg-nb-white border border-black/10 flex items-center gap-3"
+                  className="p-4 rounded-xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 flex items-center gap-3"
                 >
                   <CheckCircle2 className="w-4 h-4 text-nb-orange flex-shrink-0" />
-                  <span className="text-nb-black font-medium">{feat}</span>
+                  <span className="text-nb-black dark:text-nb-off-white font-medium">{feat}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               Technology Stack
             </h3>
-            <div className="p-8 rounded-3xl bg-nb-white border border-black/10 space-y-4 font-mono-tech text-xs">
+            <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-4 font-mono-tech text-xs">
               <div className="flex items-center gap-2 text-nb-orange font-bold">
                 <Terminal className="w-4 h-4" />
                 <span>DEPLOYED INFRASTRUCTURE</span>
@@ -177,7 +177,7 @@ export default function WorkDetailPage({ params }: Props) {
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 rounded-lg bg-nb-off-white border border-black/10 text-nb-black font-semibold"
+                    className="px-3 py-1.5 rounded-lg bg-nb-off-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-nb-black dark:text-nb-off-white font-semibold"
                   >
                     {tech}
                   </span>
@@ -190,7 +190,7 @@ export default function WorkDetailPage({ params }: Props) {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 text-center space-y-6">
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black dark:text-nb-white">
           Need a similar digital presence engineered?
         </h2>
         <div className="flex justify-center pt-2">

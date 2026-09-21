@@ -49,15 +49,15 @@ export default function InsightArticlePage({ params }: Props) {
           <SignalBadge label={article.category} tag="PERSPECTIVE" />
         </div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-nb-black leading-[1.08]">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.08]">
           {article.title}
         </h1>
 
-        <p className="text-lg sm:text-2xl text-nb-graphite/90 font-light leading-relaxed">
+        <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
           {article.subtitle}
         </p>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-black/10 font-mono-tech text-xs text-nb-muted">
+        <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-black/10 dark:border-white/10 font-mono-tech text-xs text-nb-muted">
           <div className="flex items-center gap-4">
             <span>BY {article.author}</span>
             <span>•</span>
@@ -71,10 +71,10 @@ export default function InsightArticlePage({ params }: Props) {
       </section>
 
       {/* Article Body */}
-      <section className="max-w-3xl mx-auto px-6 sm:px-8 space-y-10 text-base sm:text-lg text-nb-graphite/90 leading-relaxed">
+      <section className="max-w-3xl mx-auto px-6 sm:px-8 space-y-10 text-base sm:text-lg text-nb-graphite/90 dark:text-nb-off-white/90 leading-relaxed">
         {article.content.map((section, idx) => (
           <div key={section.heading} className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight pt-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight pt-4">
               {section.heading}
             </h2>
 
@@ -85,7 +85,7 @@ export default function InsightArticlePage({ params }: Props) {
             ))}
 
             {section.callout && (
-              <div className="my-8 p-6 sm:p-8 rounded-2xl bg-nb-black text-nb-off-white border-l-4 border-nb-orange font-mono-tech text-sm leading-relaxed">
+              <div className="my-8 p-6 sm:p-8 rounded-2xl bg-nb-black dark:bg-nb-soft-black text-nb-off-white border-l-4 border-nb-orange border border-white/10 font-mono-tech text-sm leading-relaxed">
                 &ldquo;{section.callout}&rdquo;
               </div>
             )}
@@ -93,12 +93,12 @@ export default function InsightArticlePage({ params }: Props) {
         ))}
 
         {/* Tags */}
-        <div className="pt-8 border-t border-black/10 flex flex-wrap items-center gap-2">
+        <div className="pt-8 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center gap-2">
           <Tag className="w-4 h-4 text-nb-orange mr-2" />
           {article.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 rounded-full bg-nb-white border border-black/10 text-xs font-mono-tech text-nb-graphite"
+              className="px-3 py-1 rounded-full bg-nb-white dark:bg-white/10 border border-black/10 dark:border-white/10 text-xs font-mono-tech text-nb-graphite dark:text-nb-off-white"
             >
               #{tag}
             </span>

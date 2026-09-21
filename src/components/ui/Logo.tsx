@@ -1,21 +1,26 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "../theme/ThemeProvider";
 
 interface LogoProps {
-  variant?: "full" | "white" | "mark";
+  variant?: "auto" | "full" | "white" | "mark";
   className?: string;
   href?: string;
   priority?: boolean;
 }
 
 export default function Logo({
-  variant = "full",
+  variant = "auto",
   className = "",
   href = "/",
   priority = true,
 }: LogoProps) {
-  const isWhite = variant === "white";
+  const { theme } = useTheme();
+
+  const isWhite = variant === "white" || (variant === "auto" && theme === "dark");
   const imageSrc = isWhite
     ? "/images/nithbyte-logo-white.png"
     : "/images/nithbyte-logo.png";

@@ -9,7 +9,7 @@ import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 
 export default function InsightsSection() {
   return (
-    <section className="py-24 sm:py-32 bg-nb-white relative border-b border-black/10">
+    <section className="py-24 sm:py-32 bg-nb-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <SectionHeader
@@ -19,7 +19,7 @@ export default function InsightsSection() {
             description="Our reflections on frontend architecture, applied machine intelligence, and modern commerce engineering."
             className="mb-0 md:mb-0"
           />
-          <MagneticButton href="/insights" variant="outline" size="md" cursorLabel="READ ALL">
+          <MagneticButton href="/insights" variant="outline" size="md" cursorLabel="READ ALL" className="dark:text-nb-white dark:border-white/20 dark:hover:bg-white dark:hover:text-nb-black">
             View All Insights
           </MagneticButton>
         </div>
@@ -30,11 +30,11 @@ export default function InsightsSection() {
             <Link
               key={article.id}
               href={`/insights/${article.slug}`}
-              className="group p-8 rounded-3xl bg-nb-off-white border border-black/10 hover:border-nb-orange/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-lg"
+              className="group p-8 rounded-3xl bg-nb-off-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 hover:border-nb-orange/50 dark:hover:border-nb-orange/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-lg"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between font-mono-tech text-xs">
-                  <span className="px-2.5 py-0.5 rounded-full bg-nb-white border border-black/10 text-nb-orange font-bold uppercase">
+                  <span className="px-2.5 py-0.5 rounded-full bg-nb-white dark:bg-white/10 border border-black/10 dark:border-white/10 text-nb-orange font-bold uppercase">
                     {article.category}
                   </span>
                   <div className="flex items-center gap-1.5 text-nb-muted">
@@ -44,16 +44,16 @@ export default function InsightsSection() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-nb-black group-hover:text-nb-orange transition-colors leading-snug">
+                  <h3 className="text-xl font-bold text-nb-black dark:text-nb-white group-hover:text-nb-orange dark:group-hover:text-nb-orange transition-colors leading-snug">
                     {article.title}
                   </h3>
-                  <p className="text-xs text-nb-graphite/80 leading-relaxed line-clamp-3">
+                  <p className="text-xs text-nb-graphite/80 dark:text-nb-muted leading-relaxed line-clamp-3">
                     {article.excerpt}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-black/5 flex items-center justify-between font-mono-tech text-xs text-nb-muted">
+              <div className="pt-6 mt-6 border-t border-black/5 dark:border-white/10 flex items-center justify-between font-mono-tech text-xs text-nb-muted">
                 <span>{article.publishedAt}</span>
                 <span className="flex items-center gap-1 text-nb-orange font-bold group-hover:translate-x-1 transition-transform">
                   Read Article <ArrowUpRight className="w-3.5 h-3.5" />

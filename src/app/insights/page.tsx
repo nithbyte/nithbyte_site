@@ -26,13 +26,13 @@ export default function InsightsPage() {
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="border-b border-black/10 pb-16 space-y-6 max-w-4xl">
+        <div className="border-b border-black/10 dark:border-white/10 pb-16 space-y-6 max-w-4xl">
           <SignalBadge label="ENGINEERING JOURNAL" tag="INSIGHTS" />
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black leading-[1.02]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
             Thoughts on engineering, <br />
             <span className="text-nb-orange">AI & digital systems.</span>
           </h1>
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 font-light leading-relaxed">
+          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
             Technical perspectives, architectural patterns, and practical reflections from our product engineering team.
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function InsightsPage() {
 
       {/* Filter & Search Bar */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-nb-white border border-black/10 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-2">
             {CATEGORIES.map((cat) => (
@@ -49,8 +49,8 @@ export default function InsightsPage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-xs font-mono-tech tracking-wider uppercase transition-colors ${
                   activeCategory === cat
-                    ? "bg-nb-black text-nb-white font-bold shadow-sm"
-                    : "text-nb-graphite hover:bg-black/5"
+                    ? "bg-nb-black text-nb-white dark:bg-nb-orange dark:text-white font-bold shadow-sm"
+                    : "text-nb-graphite dark:text-nb-muted hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
               >
                 {cat}
@@ -66,14 +66,14 @@ export default function InsightsPage() {
               placeholder="Search insights..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-xl bg-nb-off-white border border-black/10 text-xs font-mono-tech focus:outline-none focus:border-nb-orange"
+              className="w-full pl-10 pr-4 py-2 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-nb-black dark:text-nb-off-white text-xs font-mono-tech focus:outline-none focus:border-nb-orange"
             />
           </div>
         </div>
 
         {/* Articles Grid */}
         {filteredArticles.length === 0 ? (
-          <div className="p-12 text-center rounded-3xl bg-nb-white border border-black/10 space-y-3 font-mono-tech text-xs">
+          <div className="p-12 text-center rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-3 font-mono-tech text-xs">
             <p className="text-nb-muted">No insights found matching your query.</p>
             <button
               onClick={() => {
@@ -91,11 +91,11 @@ export default function InsightsPage() {
               <Link
                 key={article.id}
                 href={`/insights/${article.slug}`}
-                className="group p-8 sm:p-10 rounded-3xl bg-nb-white border border-black/10 hover:border-nb-orange/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl"
+                className="group p-8 sm:p-10 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 hover:border-nb-orange/50 dark:hover:border-nb-orange/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between font-mono-tech text-xs">
-                    <span className="px-3 py-1 rounded-full bg-nb-off-white border border-black/10 text-nb-orange font-bold uppercase">
+                    <span className="px-3 py-1 rounded-full bg-nb-off-white dark:bg-white/10 border border-black/10 dark:border-white/10 text-nb-orange font-bold uppercase">
                       {article.category}
                     </span>
                     <div className="flex items-center gap-1.5 text-nb-muted">
@@ -105,10 +105,10 @@ export default function InsightsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-nb-black group-hover:text-nb-orange transition-colors leading-snug">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white group-hover:text-nb-orange dark:group-hover:text-nb-orange transition-colors leading-snug">
                       {article.title}
                     </h2>
-                    <p className="text-sm text-nb-graphite/80 leading-relaxed">
+                    <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
                       {article.excerpt}
                     </p>
                   </div>
@@ -117,7 +117,7 @@ export default function InsightsPage() {
                     {article.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-0.5 rounded bg-nb-off-white text-[10px] font-mono-tech text-nb-muted border border-black/5"
+                        className="px-2 py-0.5 rounded bg-nb-off-white dark:bg-white/5 text-[10px] font-mono-tech text-nb-muted border border-black/5 dark:border-white/5"
                       >
                         #{tag}
                       </span>
@@ -125,7 +125,7 @@ export default function InsightsPage() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-black/5 flex items-center justify-between font-mono-tech text-xs text-nb-muted">
+                <div className="pt-6 mt-6 border-t border-black/5 dark:border-white/10 flex items-center justify-between font-mono-tech text-xs text-nb-muted">
                   <span>{article.publishedAt}</span>
                   <span className="flex items-center gap-1 text-nb-orange font-bold group-hover:translate-x-1 transition-transform">
                     Read Article <ArrowUpRight className="w-3.5 h-3.5" />

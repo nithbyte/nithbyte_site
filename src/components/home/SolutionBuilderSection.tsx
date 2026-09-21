@@ -129,7 +129,7 @@ export default function SolutionBuilderSection() {
   const result = getCombinationResult(selectedModules);
 
   return (
-    <section className="py-24 sm:py-32 bg-nb-white relative border-b border-black/10">
+    <section className="py-24 sm:py-32 bg-nb-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <SectionHeader
           badgeLabel="SOLUTION SYNTHESIZER"
@@ -150,8 +150,8 @@ export default function SolutionBuilderSection() {
                 data-cursor-text="COMBINE"
                 className={`p-4 rounded-2xl border text-left transition-all duration-200 select-none relative group overflow-hidden ${
                   isSelected
-                    ? "bg-nb-black text-nb-white border-nb-orange shadow-lg shadow-nb-orange/10 -translate-y-1"
-                    : "bg-nb-off-white text-nb-black border-black/10 hover:border-nb-orange/50 hover:bg-nb-white"
+                    ? "bg-nb-black dark:bg-nb-soft-black text-nb-white border-nb-orange shadow-lg shadow-nb-orange/10 -translate-y-1"
+                    : "bg-nb-off-white dark:bg-nb-soft-black text-nb-black dark:text-nb-off-white border-black/10 dark:border-white/10 hover:border-nb-orange/50 hover:bg-nb-white dark:hover:bg-nb-graphite/40"
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -160,7 +160,7 @@ export default function SolutionBuilderSection() {
                   </span>
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center transition-colors ${
-                      isSelected ? "bg-nb-orange text-white" : "bg-black/10 text-transparent"
+                      isSelected ? "bg-nb-orange text-white" : "bg-black/10 dark:bg-white/10 text-transparent"
                     }`}
                   >
                     <Check className="w-3 h-3" />

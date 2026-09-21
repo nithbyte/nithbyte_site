@@ -15,12 +15,12 @@ export default function CareersPage() {
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="border-b border-black/10 pb-16 space-y-6 max-w-4xl">
+        <div className="border-b border-black/10 dark:border-white/10 pb-16 space-y-6 max-w-4xl">
           <SignalBadge label="TALENT & CULTURE" tag="CAREERS" />
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black leading-[1.02]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
             Engineering culture built on <span className="text-nb-orange">craft and autonomy.</span>
           </h1>
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 font-light leading-relaxed">
+          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
             We value first-principles reasoning, high agency, and an uncompromising obsession with clean code and fluid interfaces.
           </p>
         </div>
@@ -28,39 +28,39 @@ export default function CareersPage() {
 
       {/* Growth Positioning & Open Applications */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-nb-white border border-black/10 shadow-sm space-y-8">
+        <div className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
           <div className="flex items-center gap-3">
             <OrangeSignal variant="pulse" label="TEAM SCALING STATUS" />
           </div>
 
           <div className="space-y-4 max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-bold text-nb-black tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
               We&apos;re growing. New opportunities will appear here.
             </h2>
-            <p className="text-base text-nb-graphite leading-relaxed">
+            <p className="text-base text-nb-graphite dark:text-nb-muted leading-relaxed">
               While we may not have an active opening for every specific role right now, we are always eager to connect with exceptional frontend engineers, system architects, and AI developers.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-black/5 font-mono-tech text-xs">
-            <div className="p-4 rounded-xl bg-nb-off-white border border-black/5 space-y-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-black/5 dark:border-white/10 font-mono-tech text-xs">
+            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
               <span className="text-nb-orange font-bold">FRONTEND ENGINEERING</span>
-              <p className="text-nb-graphite/80">Next.js, TypeScript, GSAP, Framer Motion, Design Systems</p>
+              <p className="text-nb-graphite/80 dark:text-nb-muted">Next.js, TypeScript, GSAP, Framer Motion, Design Systems</p>
             </div>
-            <div className="p-4 rounded-xl bg-nb-off-white border border-black/5 space-y-1">
+            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
               <span className="text-nb-orange font-bold">BACKEND & CLOUD</span>
-              <p className="text-nb-graphite/80">NestJS, PostgreSQL, Redis, Docker, Microservices</p>
+              <p className="text-nb-graphite/80 dark:text-nb-muted">NestJS, PostgreSQL, Redis, Docker, Microservices</p>
             </div>
-            <div className="p-4 rounded-xl bg-nb-off-white border border-black/5 space-y-1">
+            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
               <span className="text-nb-orange font-bold">AI & AUTOMATION</span>
-              <p className="text-nb-graphite/80">LLMs, Vector Search, LangChain, Python, Workflow Automation</p>
+              <p className="text-nb-graphite/80 dark:text-nb-muted">LLMs, Vector Search, LangChain, Python, Workflow Automation</p>
             </div>
           </div>
 
           <div className="pt-4 flex items-center gap-4">
             <a
               href="mailto:nithbyte@gmail.com?subject=Spontaneous%20Application%20—%20Engineering"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black text-white font-mono-tech text-xs font-bold hover:bg-nb-orange transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black dark:bg-nb-orange text-white font-mono-tech text-xs font-bold hover:bg-nb-orange dark:hover:bg-nb-deep-orange transition-colors"
             >
               Send Spontaneous Profile / GitHub →
             </a>

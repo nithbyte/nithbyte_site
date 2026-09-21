@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Logo from "../ui/Logo";
 import MagneticButton from "../interactions/MagneticButton";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const NAV_LINKS = [
   { name: "About", href: "/about", number: "01" },
@@ -53,14 +54,14 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "py-3 bg-nb-off-white/95 border-b border-black/5 shadow-sm backdrop-blur-md"
+            ? "py-3 bg-nb-off-white/95 dark:bg-nb-black/95 border-b border-black/5 dark:border-white/10 shadow-sm backdrop-blur-md"
             : "py-6 bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Logo variant="full" />
+            <Logo variant="auto" />
           </div>
 
           {/* Desktop Navigation Links */}
@@ -72,7 +73,9 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={`relative py-1 transition-colors duration-200 group ${
-                    isActive ? "text-nb-black font-semibold" : "text-nb-graphite/80 hover:text-nb-orange"
+                    isActive
+                      ? "text-nb-black dark:text-nb-white font-semibold"
+                      : "text-nb-graphite/80 dark:text-nb-muted hover:text-nb-orange dark:hover:text-nb-orange"
                   }`}
                 >
                   <span>{link.name}</span>
@@ -90,19 +93,21 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Action */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Right Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle size="md" />
             <MagneticButton href="/contact" variant="primary" size="sm" cursorLabel="LET'S BUILD">
               Start a Project
             </MagneticButton>
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="flex md:hidden items-center gap-3">
+          {/* Mobile Menu Trigger & Theme Toggle */}
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle size="sm" />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="p-2 text-nb-black hover:text-nb-orange focus:outline-none transition-colors"
+              className="p-2 text-nb-black dark:text-nb-white hover:text-nb-orange focus:outline-none transition-colors"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -121,9 +126,12 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-nb-black text-nb-white flex flex-col justify-between pt-24 pb-8 px-8 md:hidden overflow-y-auto"
           >
             <div className="space-y-6 pt-4">
-              <p className="text-xs font-mono-tech text-nb-orange tracking-widest uppercase">
-                SYSTEM DIRECTORY
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-mono-tech text-nb-orange tracking-widest uppercase">
+                  SYSTEM DIRECTORY
+                </p>
+                <ThemeToggle size="sm" />
+              </div>
               <div className="space-y-4">
                 {NAV_LINKS.map((link, idx) => (
                   <motion.div

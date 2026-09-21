@@ -249,10 +249,10 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-6 sm:px-8 max-w-7xl mx-auto overflow-hidden">
       {/* Top Meta Line */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 pb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 dark:border-white/10 pb-6">
         <SignalBadge label="DIGITAL PRODUCT ENGINEERING" tag="SYSTEM" />
         <div className="flex items-center gap-3 text-xs font-mono-tech text-nb-muted">
-          <span className="text-nb-black font-semibold">EST. 2026</span>
+          <span className="text-nb-black dark:text-nb-off-white font-semibold">EST. 2026</span>
           <span>/</span>
           <span>GLOBAL DEPLOYMENT</span>
         </div>
@@ -262,13 +262,13 @@ export default function HeroSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto py-8">
         {/* Left Column: Headline */}
         <div className="lg:col-span-7 space-y-6">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[0.95] text-nb-black">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[0.95] text-nb-black dark:text-nb-white">
             IDEAS <br />
-            <span className="text-nb-graphite/90">NEED A PLACE</span> <br />
+            <span className="text-nb-graphite/90 dark:text-nb-muted">NEED A PLACE</span> <br />
             <span className="text-nb-orange">TO BECOME REAL.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-nb-graphite/80 max-w-xl font-normal leading-relaxed">
+          <p className="text-lg sm:text-xl text-nb-graphite/80 dark:text-nb-muted max-w-xl font-normal leading-relaxed">
             We design and engineer digital products, commerce experiences, and intelligent systems for ambitious international businesses.
           </p>
 
@@ -276,22 +276,22 @@ export default function HeroSection() {
             <MagneticButton href="/contact" variant="primary" size="lg" cursorLabel="LET'S BUILD">
               Start a Project
             </MagneticButton>
-            <MagneticButton href="/work" variant="outline" size="lg" cursorLabel="EXPLORE ↗">
+            <MagneticButton href="/work" variant="outline" size="lg" cursorLabel="EXPLORE ↗" className="dark:text-nb-white dark:border-white/20 dark:hover:bg-white dark:hover:text-nb-black">
               Explore Our Work
             </MagneticButton>
           </div>
 
           <div className="pt-6 flex items-center gap-4 text-xs font-mono-tech text-nb-muted">
             <span className="text-nb-orange font-bold">TAGLINE</span>
-            <span className="text-nb-black font-medium">Where Ideas Find Their Code.</span>
+            <span className="text-nb-black dark:text-nb-off-white font-medium">Where Ideas Find Their Code.</span>
           </div>
         </div>
 
         {/* Right Column: Generative System Experience */}
         <div className="lg:col-span-5 relative">
-          <div className="relative bg-nb-white rounded-2xl border border-black/10 shadow-2xl overflow-hidden p-6 aspect-square max-w-md mx-auto flex flex-col justify-between">
+          <div className="relative bg-nb-white dark:bg-nb-soft-black rounded-2xl border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden p-6 aspect-square max-w-md mx-auto flex flex-col justify-between transition-colors">
             {/* Top Stage Indicators */}
-            <div className="flex items-center justify-between border-b border-black/5 pb-3 z-10">
+            <div className="flex items-center justify-between border-b border-black/5 dark:border-white/10 pb-3 z-10">
               <span className="text-[11px] font-mono-tech text-nb-muted uppercase tracking-wider">
                 SIGNATURE INTERACTION
               </span>
@@ -306,7 +306,7 @@ export default function HeroSection() {
             </div>
 
             {/* Stage Selector Dots */}
-            <div className="pt-3 border-t border-black/5 flex items-center justify-between z-10">
+            <div className="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between z-10">
               <div className="flex items-center gap-1.5">
                 {STAGES.map((s, idx) => (
                   <button
@@ -315,13 +315,13 @@ export default function HeroSection() {
                     className={`h-2 rounded-full transition-all duration-300 ${
                       activeStage === idx
                         ? "w-6 bg-nb-orange"
-                        : "w-2 bg-black/20 hover:bg-black/40"
+                        : "w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40"
                     }`}
                     aria-label={s.label}
                   />
                 ))}
               </div>
-              <p className="text-[11px] font-mono-tech text-nb-graphite text-right truncate max-w-[180px]">
+              <p className="text-[11px] font-mono-tech text-nb-graphite dark:text-nb-muted text-right truncate max-w-[180px]">
                 {STAGES[activeStage].desc}
               </p>
             </div>
@@ -330,7 +330,7 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Scroll Prompt */}
-      <div className="pt-6 border-t border-black/10 flex items-center justify-between text-xs font-mono-tech text-nb-muted">
+      <div className="pt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono-tech text-nb-muted">
         <div className="flex items-center gap-2">
           <ArrowDown className="w-3.5 h-3.5 text-nb-orange animate-bounce" />
           <span>SCROLL TO TRACE THE SIGNAL</span>

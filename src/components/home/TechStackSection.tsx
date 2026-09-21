@@ -60,7 +60,7 @@ const TECH_ECOSYSTEM: StackLayer[] = [
 
 export default function TechStackSection() {
   return (
-    <section className="py-24 sm:py-32 bg-nb-off-white relative border-b border-black/10">
+    <section className="py-24 sm:py-32 bg-nb-off-white dark:bg-nb-black relative border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <SectionHeader
           badgeLabel="TECHNOLOGY STACK"
@@ -74,9 +74,9 @@ export default function TechStackSection() {
           {TECH_ECOSYSTEM.map((layer) => (
             <div
               key={layer.layer}
-              className="p-6 sm:p-8 rounded-2xl bg-nb-white border border-black/10 shadow-sm space-y-4 hover:border-nb-orange/40 transition-colors"
+              className="p-6 sm:p-8 rounded-2xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-4 hover:border-nb-orange/40 transition-colors"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/5 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/5 dark:border-white/10 pb-4">
                 <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase tracking-wider">
                   {layer.layer}
                 </span>
@@ -89,9 +89,9 @@ export default function TechStackSection() {
                 {layer.technologies.map((tech) => (
                   <div
                     key={tech.name}
-                    className="p-3.5 rounded-xl bg-nb-off-white border border-black/5 hover:border-nb-orange/40 transition-all group"
+                    className="p-3.5 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 hover:border-nb-orange/40 transition-all group"
                   >
-                    <p className="font-bold text-sm text-nb-black group-hover:text-nb-orange transition-colors">
+                    <p className="font-bold text-sm text-nb-black dark:text-nb-white group-hover:text-nb-orange transition-colors">
                       {tech.name}
                     </p>
                     <p className="text-[10px] font-mono-tech text-nb-muted mt-0.5">
