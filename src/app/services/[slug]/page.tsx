@@ -5,6 +5,7 @@ import Link from "next/link";
 import SignalBadge from "@/components/ui/SignalBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MagneticButton from "@/components/interactions/MagneticButton";
+import ServiceArchitectureVisualizer from "@/components/visuals/services/ServiceArchitectureVisualizer";
 import { SERVICES } from "@/data/services";
 import { ArrowUpRight, ArrowLeft, CheckCircle2, Terminal } from "lucide-react";
 
@@ -74,8 +75,13 @@ export default function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Interactive System Architecture Vector Graphic */}
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
+        <ServiceArchitectureVisualizer slug={service.slug} />
+      </section>
+
       {/* Capabilities Breakdown */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
         <SectionHeader
           badgeLabel="CAPABILITY DECOMPOSITION"
           badgeTag="SPECIFICATIONS"

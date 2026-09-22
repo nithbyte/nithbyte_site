@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import SectionHeader from "../ui/SectionHeader";
 import { ArrowUpRight, CheckCircle2, Terminal, Cpu, Globe, Smartphone, ShoppingBag, TrendingUp, Sparkles } from "lucide-react";
+import ServiceArchitectureVisualizer from "../visuals/services/ServiceArchitectureVisualizer";
 
 interface CapabilityItem {
   id: string;
@@ -173,32 +174,37 @@ export default function CapabilitiesSection() {
                   <div className="flex items-center justify-between border-b border-white/10 pb-3 font-mono-tech text-xs text-nb-muted">
                     <span className="flex items-center gap-2">
                       <Terminal className="w-4 h-4 text-nb-orange" />
-                      CONNECTED SYSTEM NODES
+                      SYSTEM ARCHITECTURE NODES
                     </span>
-                    <span className="text-nb-orange">{activeCap.nodes.length} ACTIVE</span>
+                    <span className="text-nb-orange">{activeCap.nodes.length} ACTIVE PIPELINES</span>
                   </div>
 
-                  <div className="space-y-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {activeCap.nodes.map((node, i) => (
                       <motion.div
                         key={node}
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.07 }}
-                        className="p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-nb-orange/40 transition-colors flex items-center justify-between group"
+                        transition={{ delay: i * 0.05 }}
+                        className="p-3 rounded-xl bg-white/5 border border-white/5 hover:border-nb-orange/40 transition-colors flex items-center justify-between group"
                       >
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs font-mono-tech text-nb-orange font-bold">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="text-[11px] font-mono-tech text-nb-orange font-bold">
                             0{i + 1}
                           </span>
-                          <span className="text-sm font-medium text-nb-off-white group-hover:text-nb-white">
+                          <span className="text-xs font-medium text-nb-off-white group-hover:text-nb-white truncate">
                             {node}
                           </span>
                         </div>
-                        <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-nb-orange transition-colors" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-nb-orange flex-shrink-0 animate-pulse" />
                       </motion.div>
                     ))}
                   </div>
+                </div>
+
+                {/* Live Architecture Visualizer Component */}
+                <div className="mt-4">
+                  <ServiceArchitectureVisualizer slug={activeCap.serviceSlug} />
                 </div>
               </div>
             </div>

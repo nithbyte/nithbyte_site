@@ -6,6 +6,7 @@ import MagneticButton from "@/components/interactions/MagneticButton";
 import OrangeSignal from "@/components/interactions/OrangeSignal";
 import { LAB_PRODUCTS } from "@/data/labs";
 import { FlaskConical, Terminal, Cpu, Layers, Sparkles, CheckCircle2 } from "lucide-react";
+import LabProductVisualizer from "@/components/visuals/labs/LabProductVisualizer";
 
 export const metadata: Metadata = {
   title: "NithByte Labs — Experimental Products",
@@ -112,6 +113,11 @@ export default function LabsPage() {
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* Interactive Vector Subsystem Pipeline */}
+            <div className="pt-4">
+              <LabProductVisualizer labId={lab.id} />
             </div>
           </div>
         ))}

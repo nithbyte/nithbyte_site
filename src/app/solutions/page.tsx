@@ -65,6 +65,24 @@ export default function SolutionsPage() {
                   {item.description}
                 </p>
 
+                {/* Visual Architecture Resolution Pipeline */}
+                <div className="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 space-y-2 font-mono-tech text-xs">
+                  <div className="flex items-center justify-between text-[10px] text-nb-muted border-b border-black/5 dark:border-white/5 pb-1.5">
+                    <span className="text-nb-orange font-bold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-nb-orange" />
+                      PIPELINE RESOLUTION
+                    </span>
+                    <span>TYPE-SAFE ARCHITECTURE</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] text-nb-black dark:text-nb-white font-bold flex-wrap">
+                    <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">DIAGNOSIS</span>
+                    <ArrowRight className="w-3 h-3 text-nb-orange" />
+                    <span className="px-2 py-0.5 rounded bg-nb-orange/20 text-nb-orange">SYSTEM SPEC</span>
+                    <ArrowRight className="w-3 h-3 text-nb-orange" />
+                    <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-green-500">SCALE SLA</span>
+                  </div>
+                </div>
+
                 <div className="pt-2 flex flex-wrap gap-2 font-mono-tech text-xs">
                   <span className="text-nb-muted mr-1">STACK:</span>
                   {item.recommendedStack.map((tech) => (

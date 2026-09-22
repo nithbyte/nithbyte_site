@@ -5,6 +5,7 @@ import SignalBadge from "@/components/ui/SignalBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MagneticButton from "@/components/interactions/MagneticButton";
 import OrangeSignal from "@/components/interactions/OrangeSignal";
+import PhilosophyFlowDiagram from "@/components/visuals/about/PhilosophyFlowDiagram";
 import { CheckCircle2, ArrowUpRight, ShieldCheck, Terminal, Cpu, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -85,6 +86,9 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+
+        {/* Visual Engineering Flow Matrix */}
+        <PhilosophyFlowDiagram />
       </section>
 
       {/* Core Philosophy / What We Believe */}

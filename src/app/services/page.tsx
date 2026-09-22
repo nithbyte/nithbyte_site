@@ -5,7 +5,8 @@ import SignalBadge from "@/components/ui/SignalBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import MagneticButton from "@/components/interactions/MagneticButton";
 import { SERVICES } from "@/data/services";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Cpu } from "lucide-react";
+import ServiceArchitectureVisualizer from "@/components/visuals/services/ServiceArchitectureVisualizer";
 
 export const metadata: Metadata = {
   title: "Services & Capabilities — NithByte",
@@ -30,8 +31,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services List */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
+      {/* Services List with Interactive Visualizer Blueprints */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-16">
         {SERVICES.map((service) => (
           <div
             key={service.id}
@@ -80,6 +81,22 @@ export default function ServicesPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Interactive Vector Architecture Blueprint */}
+            <div className="mt-8 pt-8 border-t border-black/5 dark:border-white/10 space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-nb-orange" />
+                  <span className="text-xs font-mono-tech text-nb-black dark:text-nb-white font-bold uppercase tracking-wider">
+                    Interactive System Architecture Blueprint
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono-tech text-nb-muted hidden sm:inline-block">
+                  Click nodes below to inspect runtime pipeline
+                </span>
+              </div>
+              <ServiceArchitectureVisualizer slug={service.slug} />
             </div>
           </div>
         ))}
