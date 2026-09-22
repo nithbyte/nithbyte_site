@@ -49,7 +49,7 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
           value={text}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
-          placeholder="Describe your project idea or ask a question..."
+          placeholder="Ask NithByte AI or describe an idea..."
           disabled={isLoading}
           rows={1}
           aria-label="Your message to NithByte AI"

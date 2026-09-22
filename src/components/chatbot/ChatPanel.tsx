@@ -63,7 +63,8 @@ export default function ChatPanel({
             role="dialog"
             aria-modal="true"
             aria-label="NithByte AI Chat Assistant"
-            className="fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 w-full sm:w-[460px] h-[92vh] sm:h-[680px] max-h-[92vh] bg-nb-black border border-white/15 sm:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col overflow-hidden text-nb-off-white"
+            data-lenis-prevent="true"
+            className="fixed bottom-0 sm:bottom-6 right-0 sm:right-6 z-50 w-full sm:w-[480px] h-[92vh] sm:h-[680px] max-h-[92vh] bg-nb-black border border-white/15 sm:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col overflow-hidden text-nb-off-white overscroll-contain"
           >
             {/* Header */}
             <ChatHeader onClose={onClose} onReset={onReset} />

@@ -143,7 +143,10 @@ export default function ChatMessages({
   }, [messages, isThinking]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 font-mono-tech">
+    <div
+      data-lenis-prevent="true"
+      className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 space-y-4 font-mono-tech scroll-smooth"
+    >
       {messages.map((msg) => {
         const isUser = msg.role === "user";
 
