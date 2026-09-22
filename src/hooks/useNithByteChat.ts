@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { ChatMessage, ProjectBriefData } from "@/lib/ai/types";
 
-const SESSION_STORAGE_KEY = "nithbyte_chat_session_v1";
+const SESSION_STORAGE_KEY = "nithbyte_chat_session_v2";
 
 const INITIAL_WELCOME_MESSAGE: ChatMessage = {
   id: "msg-welcome-0",
@@ -62,32 +62,36 @@ export function useNithByteChat() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          setMessages(parsed);
-          // Check for any existing brief
-          for (let i = parsed.length - 1; i >= 0; i--) {
-            const b = extractBriefFromText(parsed[i].content);
-            if (b) {
-              setLatestBrief(b);
-              break;
+          // Filter out temporary errors
+          const valid = parsed.filter((m: ChatMessage) => !m.isError);
+          if (valid.length > 0) {
+            setMessages(valid);
+            for (let i = valid.length - 1; i >= 0; i--) {
+              const b = extractBriefFromText(valid[i].content);
+              if (b) {
+                setLatestBrief(b);
+                break;
+              }
             }
           }
         }
       }
     } catch {
-      // sessionStorage unavailable or disabled
+      // sessionStorage unavailable
     }
   }, []);
 
-  // Save session changes
+  // Save session changes (filtering out transient streaming states)
   useEffect(() => {
     try {
-      if (messages.length > 1) {
-        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(messages));
+      if (messages.length > 1 && !isLoading) {
+        const toSave = messages.filter((m) => !m.isError && m.content.trim().length > 0);
+        sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(toSave));
       }
     } catch {
       // Ignore sessionStorage errors
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const sendMessage = useCallback(
     async (text: string) => {
@@ -102,7 +106,9 @@ export function useNithByteChat() {
         timestamp: Date.now(),
       };
 
-      const newMessages = [...messages, userMsg];
+      // Strip any previous error message from active history
+      const cleanPrevMessages = messages.filter((m) => !m.isError && m.content.trim().length > 0);
+      const newMessages = [...cleanPrevMessages, userMsg];
       setMessages(newMessages);
       setIsLoading(true);
       setIsThinking(true);
@@ -128,18 +134,21 @@ export function useNithByteChat() {
         }
         abortControllerRef.current = new AbortController();
 
+        // Build payload with only valid user/assistant turns
+        const payloadMessages = newMessages
+          .filter((m) => !m.isError && m.content.trim().length > 0)
+          .map((m) => ({ role: m.role, content: m.content }));
+
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
-          }),
+          body: JSON.stringify({ messages: payloadMessages }),
           signal: abortControllerRef.current.signal,
         });
 
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error || "Failed to reach NithByte AI.");
+          throw new Error(errData.error || "Failed to connect to NithByte AI.");
         }
 
         const reader = response.body?.getReader();
@@ -183,14 +192,15 @@ export function useNithByteChat() {
       } catch (err: any) {
         if (err.name === "AbortError") return;
 
-        setError(err?.message || "Something interrupted the connection. Please try again.");
+        setError(err?.message || "Something interrupted the connection. Please click Try Again.");
         setMessages((prev) =>
           prev.map((msg) =>
             msg.id === assistantMsgId
               ? {
                   ...msg,
-                  content: "Something interrupted the connection with NithByte AI. Please click 'Try Again' or verify your network.",
+                  content: "Something interrupted the connection with NithByte AI. Please try again.",
                   isStreaming: false,
+                  isError: true,
                 }
               : msg
           )
@@ -202,6 +212,14 @@ export function useNithByteChat() {
     },
     [messages, isLoading]
   );
+
+  const retryLastMessage = useCallback(() => {
+    // Find the last user message
+    const lastUserMsg = [...messages].reverse().find((m) => m.role === "user");
+    if (lastUserMsg) {
+      sendMessage(lastUserMsg.content);
+    }
+  }, [messages, sendMessage]);
 
   const resetConversation = useCallback(() => {
     if (abortControllerRef.current) {
@@ -221,6 +239,7 @@ export function useNithByteChat() {
     setLatestBrief(null);
     try {
       sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      sessionStorage.removeItem("nithbyte_chat_session_v1");
     } catch {
       // Ignore
     }
@@ -235,6 +254,7 @@ export function useNithByteChat() {
     error,
     latestBrief,
     sendMessage,
+    retryLastMessage,
     resetConversation,
   };
 }

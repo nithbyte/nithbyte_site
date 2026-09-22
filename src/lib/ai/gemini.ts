@@ -3,29 +3,61 @@ import { AI_CONFIG } from "./config";
 import { AIProvider } from "./types";
 
 export class GeminiProvider implements AIProvider {
-  private client: GoogleGenAI;
+  private client: GoogleGenAI | null = null;
 
-  constructor() {
-    if (!AI_CONFIG.apiKey) {
-      throw new Error("GEMINI_API_KEY environment variable is not configured.");
+  private getClient(): GoogleGenAI {
+    const key = process.env.GEMINI_API_KEY || AI_CONFIG.apiKey;
+    if (!key) {
+      throw new Error("GEMINI_API_KEY environment variable is not configured in .env.local.");
     }
-    this.client = new GoogleGenAI({
-      apiKey: AI_CONFIG.apiKey,
-    });
+    if (!this.client) {
+      this.client = new GoogleGenAI({ apiKey: key });
+    }
+    return this.client;
   }
 
   async streamResponse(input: {
     messages: Array<{ role: "user" | "assistant"; content: string }>;
     systemPrompt: string;
   }): Promise<ReadableStream<Uint8Array>> {
-    // Format conversation history for Gemini: 'user' or 'model'
-    const contents = input.messages.map((m) => ({
-      role: m.role === "assistant" ? ("model" as const) : ("user" as const),
-      parts: [{ text: m.content }],
-    }));
+    const client = this.getClient();
+    const model = process.env.GEMINI_MODEL || AI_CONFIG.model || "gemini-flash-latest";
 
-    const responseStream = await this.client.models.generateContentStream({
-      model: AI_CONFIG.model,
+    // 1. Sanitize and normalize conversation turns for Gemini
+    const rawContents = input.messages
+      .filter((m) => m.content && m.content.trim().length > 0)
+      .map((m) => ({
+        role: m.role === "assistant" ? ("model" as const) : ("user" as const),
+        parts: [{ text: m.content }],
+      }));
+
+    const contents: Array<{ role: "user" | "model"; parts: Array<{ text: string }> }> = [];
+    for (const msg of rawContents) {
+      if (contents.length === 0 && msg.role === "model") {
+        // Skip static initial welcome message so conversation cleanly starts with a user turn
+        continue;
+      }
+      if (contents.length > 0 && contents[contents.length - 1].role === msg.role) {
+        // Merge consecutive turns of same role
+        contents[contents.length - 1].parts[0].text += `\n\n${msg.parts[0].text}`;
+      } else {
+        contents.push({
+          role: msg.role,
+          parts: [{ text: msg.parts[0].text }],
+        });
+      }
+    }
+
+    // Ensure we have at least one message
+    if (contents.length === 0 && input.messages.length > 0) {
+      contents.push({
+        role: "user",
+        parts: [{ text: input.messages[input.messages.length - 1].content || "Hello" }],
+      });
+    }
+
+    const responseStream = await client.models.generateContentStream({
+      model,
       contents,
       config: {
         systemInstruction: input.systemPrompt,
@@ -53,3 +85,4 @@ export class GeminiProvider implements AIProvider {
     });
   }
 }
+

@@ -16,6 +16,7 @@ interface ChatPanelProps {
   isThinking: boolean;
   onSendMessage: (msg: string) => void;
   onQuickAction: (prompt: string) => void;
+  onRetry?: () => void;
 }
 
 export default function ChatPanel({
@@ -27,6 +28,7 @@ export default function ChatPanel({
   isThinking,
   onSendMessage,
   onQuickAction,
+  onRetry,
 }: ChatPanelProps) {
   // Listen for Escape key
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function ChatPanel({
               isLoading={isLoading}
               isThinking={isThinking}
               onQuickAction={onQuickAction}
+              onRetry={onRetry}
               onCloseChat={onClose}
             />
 

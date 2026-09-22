@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { RefreshCw, AlertCircle } from "lucide-react";
 import { ChatMessage, ProjectBriefData } from "@/lib/ai/types";
 import ThinkingIndicator from "./ThinkingIndicator";
 import ProjectBriefCard from "./ProjectBriefCard";
@@ -13,12 +14,12 @@ interface ChatMessagesProps {
   isThinking: boolean;
   isLoading: boolean;
   onQuickAction: (prompt: string) => void;
+  onRetry?: () => void;
   onCloseChat?: () => void;
 }
 
 // Simple safe markdown renderer for bold, lists, and links
 function FormattedContent({ content }: { content: string }) {
-  // If the content contains ### PROJECT BRIEF, we omit the raw brief text since ProjectBriefCard renders it visually
   let cleanContent = content;
   if (content.includes("### PROJECT BRIEF")) {
     cleanContent = content.split("### PROJECT BRIEF")[0].trim();
@@ -38,7 +39,7 @@ function FormattedContent({ content }: { content: string }) {
         if (trimmed.startsWith("###") || trimmed.startsWith("##")) {
           const text = trimmed.replace(/^#+\s*/, "");
           return (
-            <h4 key={idx} className="font-bold text-white font-mono-tech pt-2 text-xs uppercase tracking-wider text-nb-orange">
+            <h4 key={idx} className="font-bold font-mono-tech pt-2 text-xs uppercase tracking-wider text-nb-orange">
               {text}
             </h4>
           );
@@ -75,7 +76,6 @@ function FormattedContent({ content }: { content: string }) {
 }
 
 function renderFormattedInline(text: string): React.ReactNode {
-  // Parse [Link Text](/path) or **Bold** or `Code`
   const parts: React.ReactNode[] = [];
   const regex = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|`[^`]+`)/g;
   let lastIndex = 0;
@@ -133,6 +133,7 @@ export default function ChatMessages({
   isThinking,
   isLoading,
   onQuickAction,
+  onRetry,
   onCloseChat,
 }: ChatMessagesProps) {
   const scrollEndRef = useRef<HTMLDivElement>(null);
@@ -166,10 +167,31 @@ export default function ChatMessages({
               className={`p-4 rounded-2xl max-w-[88%] sm:max-w-[82%] text-xs sm:text-sm leading-relaxed ${
                 isUser
                   ? "bg-white/10 text-white border border-white/15 rounded-tr-sm"
+                  : msg.isError
+                  ? "bg-red-950/40 border border-red-500/30 text-red-200 rounded-tl-sm space-y-3"
                   : "bg-nb-soft-black text-nb-off-white border border-white/10 rounded-tl-sm shadow-md"
               }`}
             >
-              <FormattedContent content={msg.content} />
+              {msg.isError ? (
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs">{msg.content}</p>
+                  </div>
+                  {onRetry && (
+                    <button
+                      onClick={onRetry}
+                      disabled={isLoading}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono-tech text-xs font-bold transition-colors disabled:opacity-50"
+                    >
+                      <RefreshCw className="w-3 h-3 text-nb-orange" />
+                      <span>Try Again</span>
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <FormattedContent content={msg.content} />
+              )}
             </div>
 
             {/* Render Project Brief Card if attached to this message */}

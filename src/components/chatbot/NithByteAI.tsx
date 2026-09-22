@@ -13,6 +13,7 @@ export default function NithByteAI() {
     isLoading,
     isThinking,
     sendMessage,
+    retryLastMessage,
     resetConversation,
   } = useNithByteChat();
 
@@ -28,6 +29,7 @@ export default function NithByteAI() {
         isThinking={isThinking}
         onSendMessage={sendMessage}
         onQuickAction={sendMessage}
+        onRetry={retryLastMessage}
       />
     </>
   );

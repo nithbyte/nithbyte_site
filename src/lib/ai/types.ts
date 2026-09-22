@@ -4,6 +4,7 @@ export interface ChatMessage {
   content: string;
   timestamp: number;
   isStreaming?: boolean;
+  isError?: boolean;
   brief?: ProjectBriefData;
 }
 
