@@ -38,42 +38,44 @@ export default function WorkDetailPage({ params }: Props) {
   return (
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="space-y-6 max-w-4xl border-b border-black/10 dark:border-white/10 pb-16">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-muted hover:text-nb-orange transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Work
-            </Link>
-            <span className="text-nb-muted">/</span>
-            <SignalBadge label={project.category} tag={project.year} />
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
-            {project.title}
-          </h1>
-
-          <p className="text-lg sm:text-2xl text-nb-orange font-light leading-relaxed">
-            {project.tagline}
-          </p>
-
-          <p className="text-base sm:text-lg text-nb-graphite/80 dark:text-nb-muted leading-relaxed max-w-3xl">
-            {project.summary}
-          </p>
-
-          <div className="pt-4 flex flex-wrap gap-4 font-mono-tech text-xs">
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black text-nb-white hover:bg-nb-orange transition-colors shadow-md dark:bg-nb-orange dark:hover:bg-nb-deep-orange"
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">
+          <div className="space-y-6 max-w-4xl">
+            <div className="flex items-center gap-4">
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-muted hover:text-nb-orange transition-colors"
               >
-                Visit Live Platform <ExternalLink className="w-4 h-4" />
-              </a>
-            )}
+                <ArrowLeft className="w-3.5 h-3.5" /> Back to Work
+              </Link>
+              <span className="text-nb-muted">/</span>
+              <SignalBadge label={project.category} tag={project.year} />
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
+              {project.title}
+            </h1>
+
+            <p className="text-lg sm:text-2xl text-nb-orange font-light leading-relaxed">
+              {project.tagline}
+            </p>
+
+            <p className="text-base sm:text-lg text-nb-graphite/80 dark:text-nb-muted leading-relaxed max-w-3xl">
+              {project.summary}
+            </p>
+
+            <div className="pt-4 flex flex-wrap gap-4 font-mono-tech text-xs">
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black text-nb-white hover:bg-nb-orange transition-colors shadow-md dark:bg-nb-orange dark:hover:bg-nb-deep-orange"
+                >
+                  Visit Live Platform <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </section>

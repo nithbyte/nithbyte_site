@@ -14,15 +14,17 @@ export default function CareersPage() {
   return (
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="border-b border-black/10 dark:border-white/10 pb-16 space-y-6 max-w-4xl">
-          <SignalBadge label="TALENT & CULTURE" tag="CAREERS" />
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
-            Engineering culture built on <span className="text-nb-orange">craft and autonomy.</span>
-          </h1>
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
-            We value first-principles reasoning, high agency, and an uncompromising obsession with clean code and fluid interfaces.
-          </p>
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">
+          <div className="space-y-6 max-w-4xl">
+            <SignalBadge label="TALENT & CULTURE" tag="CAREERS" />
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
+              Engineering culture built on <span className="text-nb-orange">craft and autonomy.</span>
+            </h1>
+            <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
+              We value first-principles reasoning, high agency, and an uncompromising obsession with clean code and fluid interfaces.
+            </p>
+          </div>
         </div>
       </section>
 

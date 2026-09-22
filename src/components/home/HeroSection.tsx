@@ -247,9 +247,9 @@ export default function HeroSection() {
   }, [activeStage]);
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-6 sm:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 px-6 sm:px-8 w-full max-w-7xl mx-auto overflow-hidden">
       {/* Top Meta Line */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 dark:border-white/10 pb-6">
+      <div className="w-full flex flex-wrap items-center justify-between gap-4 border-b border-black/10 dark:border-white/10 pb-6">
         <SignalBadge label="DIGITAL PRODUCT ENGINEERING" tag="SYSTEM" />
         <div className="flex items-center gap-3 text-xs font-mono-tech text-nb-muted">
           <span className="text-nb-black dark:text-nb-off-white font-semibold">EST. 2026</span>
@@ -259,7 +259,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main Headline & Generative Interaction */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto py-8">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto py-8">
         {/* Left Column: Headline */}
         <div className="lg:col-span-7 space-y-6">
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[0.95] text-nb-black dark:text-nb-white">
@@ -288,8 +288,8 @@ export default function HeroSection() {
         </div>
 
         {/* Right Column: Generative System Experience */}
-        <div className="lg:col-span-5 relative">
-          <div className="relative bg-nb-white dark:bg-nb-soft-black rounded-2xl border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden p-6 aspect-square max-w-md mx-auto flex flex-col justify-between transition-colors">
+        <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+          <div className="relative w-full bg-nb-white dark:bg-nb-soft-black rounded-2xl border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden p-6 aspect-square max-w-md lg:max-w-none flex flex-col justify-between transition-colors">
             {/* Top Stage Indicators */}
             <div className="flex items-center justify-between border-b border-black/5 dark:border-white/10 pb-3 z-10">
               <span className="text-[11px] font-mono-tech text-nb-muted uppercase tracking-wider">
@@ -330,7 +330,7 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Scroll Prompt */}
-      <div className="pt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono-tech text-nb-muted">
+      <div className="w-full pt-6 border-t border-black/10 dark:border-white/10 flex items-center justify-between text-xs font-mono-tech text-nb-muted">
         <div className="flex items-center gap-2">
           <ArrowDown className="w-3.5 h-3.5 text-nb-orange animate-bounce" />
           <span>SCROLL TO TRACE THE SIGNAL</span>

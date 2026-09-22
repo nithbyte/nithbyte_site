@@ -44,15 +44,17 @@ export default function AboutPage() {
   return (
     <div className="pt-32 pb-24 space-y-24">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="border-b border-black/10 dark:border-white/10 pb-16 space-y-6 max-w-4xl">
-          <SignalBadge label="ABOUT NITHBYTE" tag="COMPANY" />
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
-            An independent engineering company built for <span className="text-nb-orange">product longevity.</span>
-          </h1>
-          <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
-            NithByte is a technology-driven digital solutions company that designs, builds, and grows digital products for modern international businesses.
-          </p>
+      <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">
+          <div className="space-y-6 max-w-4xl">
+            <SignalBadge label="ABOUT NITHBYTE" tag="COMPANY" />
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-nb-black dark:text-nb-white leading-[1.02]">
+              An independent engineering company built for <span className="text-nb-orange">product longevity.</span>
+            </h1>
+            <p className="text-lg sm:text-2xl text-nb-graphite/90 dark:text-nb-muted font-light leading-relaxed">
+              NithByte is a technology-driven digital solutions company that designs, builds, and grows digital products for modern international businesses.
+            </p>
+          </div>
         </div>
       </section>
 
