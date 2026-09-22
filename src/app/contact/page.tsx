@@ -49,6 +49,23 @@ function ContactFormContent() {
   });
 
   useEffect(() => {
+    // 1. Handler for direct event from chatbot
+    const handleCustomBriefEvent = (e: any) => {
+      if (e.detail) {
+        const detail = e.detail;
+        setFormData((prev) => ({
+          ...prev,
+          projectType: detail.projectType || prev.projectType,
+          projectStage: detail.projectStage || prev.projectStage,
+          description: detail.description || prev.description,
+        }));
+        setHasImportedBrief(true);
+      }
+    };
+
+    window.addEventListener("nithbyte_apply_brief", handleCustomBriefEvent);
+
+    // 2. Check searchParams
     const paramType = searchParams.get("type");
     const paramStage = searchParams.get("stage");
     const paramDesc = searchParams.get("description");
@@ -61,7 +78,30 @@ function ContactFormContent() {
         description: paramDesc || prev.description,
       }));
       setHasImportedBrief(true);
+    } else {
+      // 3. Check sessionStorage
+      try {
+        const stored = sessionStorage.getItem("nithbyte_active_project_brief");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && (parsed.description || parsed.projectType)) {
+            setFormData((prev) => ({
+              ...prev,
+              projectType: parsed.projectType || prev.projectType,
+              projectStage: parsed.projectStage || prev.projectStage,
+              description: parsed.description || prev.description,
+            }));
+            setHasImportedBrief(true);
+          }
+        }
+      } catch {
+        // ignore
+      }
     }
+
+    return () => {
+      window.removeEventListener("nithbyte_apply_brief", handleCustomBriefEvent);
+    };
   }, [searchParams]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -190,7 +230,7 @@ function ContactFormContent() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form id="enquiry-form" onSubmit={handleSubmit} className="space-y-8">
                   {/* Step 1: Personal / Company Details */}
                   <div className="space-y-4">
                     <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase tracking-wider">
