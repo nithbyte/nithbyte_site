@@ -13,19 +13,19 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem("nithbyte-theme") as Theme | null;
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setThemeState(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else {
-      // Default to dark theme for maximum wow factor and technical prestige
+    if (savedTheme === "dark") {
       setThemeState("dark");
       document.documentElement.classList.add("dark");
+    } else {
+      // Default to light theme on initial load
+      setThemeState("light");
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -50,7 +50,7 @@ export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
     return {
-      theme: "dark" as Theme,
+      theme: "light" as Theme,
       toggleTheme: () => {},
       setTheme: () => {},
     };
