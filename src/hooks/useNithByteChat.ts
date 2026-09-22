@@ -192,13 +192,14 @@ export function useNithByteChat() {
       } catch (err: any) {
         if (err.name === "AbortError") return;
 
-        setError(err?.message || "Something interrupted the connection. Please click Try Again.");
+        const errorText = err?.message || "Something interrupted the connection with NithByte AI. Please click Try Again.";
+        setError(errorText);
         setMessages((prev) =>
           prev.map((msg) =>
             msg.id === assistantMsgId
               ? {
                   ...msg,
-                  content: "Something interrupted the connection with NithByte AI. Please try again.",
+                  content: errorText,
                   isStreaming: false,
                   isError: true,
                 }

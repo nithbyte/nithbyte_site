@@ -3,10 +3,10 @@ import { getAIProvider } from "@/lib/ai/provider";
 import { getNithByteSystemPrompt } from "@/lib/ai/nithbyte-system-prompt";
 import { AI_CONFIG } from "@/lib/ai/config";
 
-// Simple in-memory sliding window rate limiter
+// Sliding window rate limiter (generous limit for development & normal user interaction)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 30; // 30 requests per minute per IP
+const MAX_REQUESTS_PER_WINDOW = 120; // 120 requests per minute per IP
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     const clientIp = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "127.0.0.1";
     if (isRateLimited(clientIp)) {
       return NextResponse.json(
-        { error: "Rate limit exceeded. Please wait a moment before sending another message." },
+        { error: "Rate limit exceeded. Please wait a few seconds before sending another message." },
         { status: 429 }
       );
     }
@@ -74,12 +74,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Ensure the last message is from user
-    const lastMsg = trimmedMessages[trimmedMessages.length - 1];
-    if (lastMsg.role !== "user") {
-      return NextResponse.json({ error: "The latest message must be from the user." }, { status: 400 });
-    }
-
     // 3. Obtain System Prompt & Stream from Gemini Provider
     const systemPrompt = getNithByteSystemPrompt();
     const provider = getAIProvider();
@@ -98,11 +92,14 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error: any) {
-    // Log safe error without exposing credentials
-    console.error("[NithByte AI Chat API Error]:", error?.message || "Internal server error");
+    console.error("[NithByte AI Chat API Error]:", error?.message || error);
+
+    const errorMessage = error?.message?.includes("quota") || error?.message?.includes("429")
+      ? "AI quota limit reached. Retrying shortly..."
+      : error?.message || "Something interrupted the connection with NithByte AI. Please try again.";
 
     return NextResponse.json(
-      { error: "Something interrupted the connection with NithByte AI. Please try again." },
+      { error: errorMessage },
       { status: 500 }
     );
   }

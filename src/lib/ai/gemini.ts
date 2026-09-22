@@ -2,6 +2,14 @@ import { GoogleGenAI } from "@google/genai";
 import { AI_CONFIG } from "./config";
 import { AIProvider } from "./types";
 
+const RESILIENT_MODELS = [
+  "gemini-flash-lite-latest",
+  "gemini-3.5-flash",
+  "gemini-3.6-flash",
+  "gemini-3.7-flash",
+  "gemini-flash-latest",
+];
+
 export class GeminiProvider implements AIProvider {
   private client: GoogleGenAI | null = null;
 
@@ -21,7 +29,6 @@ export class GeminiProvider implements AIProvider {
     systemPrompt: string;
   }): Promise<ReadableStream<Uint8Array>> {
     const client = this.getClient();
-    const model = process.env.GEMINI_MODEL || AI_CONFIG.model || "gemini-flash-latest";
 
     // 1. Sanitize and normalize conversation turns for Gemini
     const rawContents = input.messages
@@ -48,23 +55,45 @@ export class GeminiProvider implements AIProvider {
       }
     }
 
-    // Ensure we have at least one message
-    if (contents.length === 0 && input.messages.length > 0) {
+    // Ensure we have at least one valid user message
+    if (contents.length === 0) {
+      const fallbackPrompt = input.messages[input.messages.length - 1]?.content || "Hello";
       contents.push({
         role: "user",
-        parts: [{ text: input.messages[input.messages.length - 1].content || "Hello" }],
+        parts: [{ text: fallbackPrompt }],
       });
     }
 
-    const responseStream = await client.models.generateContentStream({
-      model,
-      contents,
-      config: {
-        systemInstruction: input.systemPrompt,
-        maxOutputTokens: AI_CONFIG.maxOutputTokens,
-        temperature: AI_CONFIG.temperature,
-      },
-    });
+    // Build ordered list of candidate models with user's preferred model first
+    const primaryModel = process.env.GEMINI_MODEL || AI_CONFIG.model || "gemini-flash-lite-latest";
+    const candidateModels = Array.from(new Set([primaryModel, ...RESILIENT_MODELS]));
+
+    let responseStream: any = null;
+    let lastError: any = null;
+
+    // 2. Cascade across candidate models to bypass temporary 429 quota spikes or 503 high demand
+    for (const model of candidateModels) {
+      try {
+        responseStream = await client.models.generateContentStream({
+          model,
+          contents,
+          config: {
+            systemInstruction: input.systemPrompt,
+            maxOutputTokens: AI_CONFIG.maxOutputTokens,
+            temperature: AI_CONFIG.temperature,
+          },
+        });
+        // Connected successfully to this model
+        break;
+      } catch (err: any) {
+        console.warn(`[NithByte AI] Model ${model} returned error (${err?.status || err?.message}). Failing over to next fallback...`);
+        lastError = err;
+      }
+    }
+
+    if (!responseStream) {
+      throw lastError || new Error("All AI models are currently busy. Please try again in a few moments.");
+    }
 
     const encoder = new TextEncoder();
 
@@ -85,4 +114,3 @@ export class GeminiProvider implements AIProvider {
     });
   }
 }
-
