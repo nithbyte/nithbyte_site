@@ -136,7 +136,7 @@ export default function CapabilitiesSection() {
               <div className="lg:col-span-6 space-y-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono-tech text-nb-orange">
                   <span>CAPABILITY DOMAIN</span>
-                  <span>//</span>
+                  <span>{"//"}</span>
                   <span className="text-white font-bold">{activeCap.tag}</span>
                 </div>
 

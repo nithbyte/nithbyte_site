@@ -62,7 +62,7 @@ export default function BlueprintSection() {
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nb-orange/10 border border-nb-orange/20 text-xs font-mono-tech text-nb-orange">
                 <span>FEATURED CLIENT</span>
-                <span>//</span>
+                <span>{"//"}</span>
                 <span className="text-white font-bold">{project.title}</span>
               </div>
 
@@ -78,7 +78,7 @@ export default function BlueprintSection() {
                 <div className="flex items-center justify-between py-2 border-b border-white/5">
                   <span className="text-nb-muted">STAGE ACTIVE</span>
                   <span className="text-nb-orange font-bold">
-                    {STAGES[activeStageIndex].step} // {STAGES[activeStageIndex].name}
+                    {STAGES[activeStageIndex].step} {"//"} {STAGES[activeStageIndex].name}
                   </span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-white/5">
@@ -173,7 +173,7 @@ export default function BlueprintSection() {
 
                   {activeStageIndex === 3 && (
                     <div className="w-full h-full bg-[#050505] rounded-xl p-4 font-mono-tech text-[11px] text-green-400/90 overflow-hidden border border-white/10 space-y-1">
-                      <p className="text-nb-muted">// Next.js Page Architecture</p>
+                      <p className="text-nb-muted">{"// Next.js Page Architecture"}</p>
                       <p><span className="text-nb-orange">export default function</span> AlpsCafe() &#123;</p>
                       <p className="pl-4">return &lt;<span className="text-blue-400">AtmosphereLayout</span>&gt;</p>
                       <p className="pl-8">&lt;<span className="text-yellow-400">CulinaryMenu</span> sync=&#123;true&#125; /&gt;</p>

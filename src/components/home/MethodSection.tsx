@@ -153,7 +153,7 @@ export default function MethodSection() {
                 <span className="px-2.5 py-1 rounded bg-nb-orange/10 border border-nb-orange/20 font-bold">
                   PHASE {currentStep.number}
                 </span>
-                <span>//</span>
+                <span>{"//"}</span>
                 <span className="text-nb-off-white uppercase">{currentStep.title}</span>
               </div>
 
