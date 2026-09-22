@@ -129,6 +129,23 @@ function ContactFormContent() {
       }
 
       setIsSubmitted(true);
+
+      // Clear any stored brief from session after successful transmission
+      try {
+        sessionStorage.removeItem("nithbyte_active_project_brief");
+      } catch {
+        // ignore
+      }
+
+      // Smoothly scroll to the top of the confirmation / contact section
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact-main-card");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 50);
     } catch (err: any) {
       console.error("Submission error:", err);
       setErrorMessage(err.message || "An unexpected error occurred. You can still reach us via email.");
@@ -174,8 +191,8 @@ function ContactFormContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Interactive Project Enquiry Form */}
           <div className="lg:col-span-8">
-            <div className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
-              {hasImportedBrief && (
+            <div id="contact-main-card" className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
+              {hasImportedBrief && !isSubmitted && (
                 <div className="p-4 rounded-2xl bg-nb-orange/10 border border-nb-orange/30 flex items-center justify-between gap-3 font-mono-tech text-xs">
                   <div className="flex items-center gap-2.5">
                     <span className="w-2 h-2 rounded-full bg-nb-orange animate-pulse" />
@@ -183,9 +200,20 @@ function ContactFormContent() {
                       SPECIFICATION IMPORTED FROM NITHBYTE AI
                     </span>
                   </div>
-                  <span className="text-[10px] text-nb-muted hidden sm:inline">
-                    FORM PRE-POPULATED
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHasImportedBrief(false);
+                      try {
+                        sessionStorage.removeItem("nithbyte_active_project_brief");
+                      } catch {
+                        // ignore
+                      }
+                    }}
+                    className="text-[10px] text-nb-muted hover:text-nb-orange underline font-semibold"
+                  >
+                    Clear imported
+                  </button>
                 </div>
               )}
 
@@ -206,6 +234,7 @@ function ContactFormContent() {
                     <button
                       onClick={() => {
                         setIsSubmitted(false);
+                        setHasImportedBrief(false);
                         setFormData({
                           name: "",
                           email: "",
@@ -216,8 +245,13 @@ function ContactFormContent() {
                           budget: "Flexible / Discovery",
                           description: "",
                         });
+                        try {
+                          sessionStorage.removeItem("nithbyte_active_project_brief");
+                        } catch {
+                          // ignore
+                        }
                       }}
-                      className="px-6 py-2.5 rounded-full bg-nb-black dark:bg-nb-orange text-white text-xs font-mono-tech uppercase font-bold hover:bg-nb-orange dark:hover:bg-nb-deep-orange transition-colors"
+                      className="px-6 py-2.5 rounded-full bg-nb-black dark:bg-nb-orange text-white text-xs font-mono-tech uppercase font-bold hover:bg-nb-orange dark:hover:bg-nb-deep-orange transition-colors cursor-pointer"
                     >
                       Submit Another Inquiry
                     </button>
