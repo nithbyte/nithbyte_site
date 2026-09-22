@@ -83,9 +83,10 @@ Where Ideas Find Their Code.
       description: descriptionText,
     };
 
-    // Save to sessionStorage so it persists across page changes
+    // Save to both sessionStorage and localStorage so it persists across page changes
     try {
       sessionStorage.setItem("nithbyte_active_project_brief", JSON.stringify(briefPayload));
+      localStorage.setItem("nithbyte_active_project_brief", JSON.stringify(briefPayload));
     } catch {
       // ignore
     }
@@ -105,7 +106,7 @@ Where Ideas Find Their Code.
         formEl.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      router.push(`/contact?type=${encodeURIComponent(mappedType)}&stage=${encodeURIComponent(mappedStage)}`);
+      router.push(`/contact?imported=true&type=${encodeURIComponent(mappedType)}&stage=${encodeURIComponent(mappedStage)}`);
     }
   };
 

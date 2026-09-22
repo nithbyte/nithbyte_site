@@ -49,7 +49,7 @@ function ContactFormContent() {
   });
 
   useEffect(() => {
-    // 1. Handler for direct event from chatbot
+    // 1. Handler for direct event from chatbot (if already on /contact)
     const handleCustomBriefEvent = (e: any) => {
       if (e.detail) {
         const detail = e.detail;
@@ -70,33 +70,29 @@ function ContactFormContent() {
     const paramStage = searchParams.get("stage");
     const paramDesc = searchParams.get("description");
 
-    if (paramType || paramStage || paramDesc) {
+    // 3. Read sessionStorage / localStorage for cross-page navigation from chatbot
+    let storedBrief: any = null;
+    try {
+      const stored = sessionStorage.getItem("nithbyte_active_project_brief") || localStorage.getItem("nithbyte_active_project_brief");
+      if (stored) {
+        storedBrief = JSON.parse(stored);
+      }
+    } catch {
+      // ignore
+    }
+
+    const resolvedType = paramType || storedBrief?.projectType;
+    const resolvedStage = paramStage || storedBrief?.projectStage;
+    const resolvedDesc = paramDesc || storedBrief?.description;
+
+    if (resolvedType || resolvedStage || resolvedDesc) {
       setFormData((prev) => ({
         ...prev,
-        projectType: paramType || prev.projectType,
-        projectStage: paramStage || prev.projectStage,
-        description: paramDesc || prev.description,
+        projectType: resolvedType || prev.projectType,
+        projectStage: resolvedStage || prev.projectStage,
+        description: resolvedDesc || prev.description,
       }));
       setHasImportedBrief(true);
-    } else {
-      // 3. Check sessionStorage
-      try {
-        const stored = sessionStorage.getItem("nithbyte_active_project_brief");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (parsed && (parsed.description || parsed.projectType)) {
-            setFormData((prev) => ({
-              ...prev,
-              projectType: parsed.projectType || prev.projectType,
-              projectStage: parsed.projectStage || prev.projectStage,
-              description: parsed.description || prev.description,
-            }));
-            setHasImportedBrief(true);
-          }
-        }
-      } catch {
-        // ignore
-      }
     }
 
     return () => {
