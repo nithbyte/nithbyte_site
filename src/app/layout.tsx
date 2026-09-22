@@ -7,7 +7,7 @@ import CustomCursor from "@/components/interactions/CustomCursor";
 import SmoothScroll from "@/components/interactions/SmoothScroll";
 import ScrollToTop from "@/components/interactions/ScrollToTop";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import NithByteAssistant from "@/components/assistant/NithByteAssistant";
+import NithByteAI from "@/components/chatbot/NithByteAI";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -97,7 +97,7 @@ export default function RootLayout({
             <main className="flex-1 w-full">{children}</main>
             <Footer />
             <ScrollToTop />
-            <NithByteAssistant />
+            <NithByteAI />
           </SmoothScroll>
         </ThemeProvider>
       </body>
