@@ -8,6 +8,7 @@ import SmoothScroll from "@/components/interactions/SmoothScroll";
 import ScrollToTop from "@/components/interactions/ScrollToTop";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import NithByteAI from "@/components/chatbot/NithByteAI";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -90,6 +91,7 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-nb-off-white text-nb-black dark:bg-nb-black dark:text-nb-off-white antialiased selection:bg-nb-orange selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
+        <GoogleAnalytics />
         <ThemeProvider>
           <SmoothScroll>
             <CustomCursor />
