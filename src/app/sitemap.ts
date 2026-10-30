@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { SERVICES } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
 import { INSIGHTS } from "@/data/insights";
+import { PRODUCTS } from "@/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nithbyte.com";
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/solutions",
     "/work",
+    "/products",
     "/labs",
     "/insights",
     "/contact",
@@ -23,7 +25,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "" ? 1.0 : route === "/products" ? 0.9 : 0.8,
+  }));
+
+  // Dynamic Product routes
+  const productRoutes = PRODUCTS.map((product) => ({
+    url: `${baseUrl}/products/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
   }));
 
   // Dynamic Service routes
@@ -50,5 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...insightRoutes];
+  return [...staticRoutes, ...productRoutes, ...serviceRoutes, ...projectRoutes, ...insightRoutes];
 }

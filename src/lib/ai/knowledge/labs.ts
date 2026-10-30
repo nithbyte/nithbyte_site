@@ -1,24 +1,50 @@
 export const LABS_KNOWLEDGE = [
   {
-    code: "LAB-01",
-    title: "NithByte Commerce",
-    status: "In Development / Private Prototype",
-    overview: "A modular, headless commerce framework engineered to give growing businesses full ownership over their checkout flow, data, and omnichannel customer touchpoints without vendor lock-in.",
+    code: "PROD-01",
+    title: "MByte",
+    status: "Commercial SaaS Platform",
+    overview: "Comprehensive pharmaceutical distribution management and field-force automation platform connecting company administrators, territory managers, and medical representatives across web and mobile applications.",
     highlights: [
-      "Sub-120ms global edge checkout latency",
-      "Composable bi-directional inventory sync across POS, warehouses, and ERPs",
-      "Self-hostable, decoupled TypeScript architecture"
+      "GPS and geofenced clinic visit validation",
+      "Doctor master directory and e-detailing visual aid player",
+      "Offline-first mobile data sync for field medical representatives",
+      "End-to-end stockist orders, collections, and territory target analytics"
     ]
   },
   {
-    code: "LAB-02",
-    title: "NithByte Intelligence (Synapse)",
-    status: "Experimental / Alpha Sandbox",
-    overview: "An operational intelligence system designed to connect enterprise data repositories, perform multi-step task execution, and automate knowledge retrieval across operational teams.",
+    code: "PROD-02",
+    title: "DineByte",
+    status: "Commercial SaaS Platform",
+    overview: "Complete restaurant management and POS SaaS platform uniting billing, table dine-in management, kitchen display systems (KDS), inventory, and online delivery workflows.",
     highlights: [
-      "Hybrid vector & dense semantic indexing (12,000+ docs/sec)",
-      "Multi-hop ReAct autonomous reasoning agent",
-      "Strict output guardrails with dual-model citation verification"
+      "Rapid touchscreen POS billing and split check settlements",
+      "Live multi-station Kitchen Display System (KDS) and KOT routing",
+      "Supported Swiggy & Zomato delivery aggregator workflows",
+      "Ingredient-level recipe deduction and automated low-stock triggers"
+    ]
+  },
+  {
+    code: "PROD-03",
+    title: "EvoByte",
+    status: "Commercial SaaS Platform",
+    overview: "Multi-client, multi-industry network marketing and business management SaaS designed for direct-selling brands in wellness, cosmetics, FMCG, and electronics.",
+    highlights: [
+      "Configurable network topologies: Direct referral, Unilevel, Binary, and Matrix",
+      "Automated multi-tier commission calculations and digital wallet disbursements",
+      "Interactive high-density genealogy network tree visualizer",
+      "Tenant-level data isolation and built-in distributor mobile commerce"
+    ]
+  },
+  {
+    code: "PROD-04",
+    title: "ChitByte",
+    status: "Commercial SaaS Platform",
+    overview: "Three-tier digital chit fund management ecosystem connecting business proprietors, collection agents, and chit subscribers through an integrated Web App, Owner App, and Customer Passbook App.",
+    highlights: [
+      "Flexible chit scheme configuration: weekly, monthly, and custom intervals",
+      "Reverse auction bidding management and automated subscriber dividend allocation",
+      "Door-to-door agent mobile collection with instant digital SMS/WhatsApp receipts",
+      "Daily cash drawer and agent hand-over balancing with audit reports"
     ]
   }
 ];

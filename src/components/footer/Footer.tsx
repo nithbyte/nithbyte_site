@@ -125,8 +125,8 @@ export default function Footer() {
               </p>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href="/labs" className="text-nb-off-white/80 hover:text-nb-orange transition-colors">
-                    NithByte Labs
+                  <Link href="/products" className="text-nb-off-white/80 hover:text-nb-orange transition-colors">
+                    NITHBYTE Products
                   </Link>
                 </li>
                 <li>
