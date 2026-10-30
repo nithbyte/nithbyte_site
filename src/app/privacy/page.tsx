@@ -5,6 +5,13 @@ import SignalBadge from "@/components/ui/SignalBadge";
 export const metadata: Metadata = {
   title: "Privacy Policy — NithByte",
   description: "Privacy policy and data governance practices at NithByte.",
+  alternates: {
+    canonical: "https://nithbyte.com/privacy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPage() {
@@ -24,31 +31,28 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">1. Information Collection</h2>
           <p>
-            NithByte respects your privacy. When you contact us through our website or send inquiries to our direct email (nithbyte@gmail.com), we only collect the information you explicitly provide (such as your name, email address, company name, and project specifications).
+            NithByte collects minimal personal information necessary to deliver our digital products and respond to project enquiries. This includes names, email addresses, and project brief parameters submitted via our contact forms.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">2. Use of Information</h2>
           <p>
-            Any information submitted is used solely to respond to your inquiries, prepare engineering estimates, and facilitate professional communications regarding potential client engagements. We do not sell, rent, or trade your personal data to third parties.
+            Information collected is strictly used to evaluate client requirements, architect technical proposals, coordinate project sprints, and communicate operational updates. We do not sell, rent, or trade your personal data to third parties.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">3. Cookies and Analytics</h2>
+          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">3. Security & Telemetry</h2>
           <p>
-            Our website is designed to be lightweight and respectful of your privacy. Any telemetry or analytics utilized is privacy-focused, non-invasive, and used strictly to improve site performance and user experience.
+            We implement industry-standard encryption, strict IAM controls, and sanitized environment boundaries. Analytics telemetry collected through our website is anonymized and used exclusively to enhance interface performance and usability.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">4. Inquiries & Data Rights</h2>
+          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">4. Contact & Inquiries</h2>
           <p>
-            For any questions regarding your data or to request data removal, please contact our team directly at{" "}
-            <a href="mailto:nithbyte@gmail.com" className="text-nb-orange font-bold hover:underline">
-              nithbyte@gmail.com
-            </a>.
+            For inquiries regarding our privacy practices or data governance policies, reach out directly to privacy@nithbyte.com.
           </p>
         </section>
       </div>

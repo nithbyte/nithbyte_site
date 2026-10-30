@@ -6,6 +6,8 @@ import SignalBadge from "@/components/ui/SignalBadge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import OrangeSignal from "@/components/interactions/OrangeSignal";
 import { ArrowUpRight, CheckCircle2, Mail, Send, Terminal, Sparkles, FileText, Check, Instagram, Facebook } from "lucide-react";
+import { getProductBySlug } from "@/data/products";
+import { SERVICES } from "@/data/services";
 
 const PROJECT_TYPES = [
   "Web Platform / Next.js",
@@ -36,6 +38,7 @@ const BUDGET_RANGES = [
 function ContactFormContent() {
   const searchParams = useSearchParams();
   const [hasImportedBrief, setHasImportedBrief] = useState(false);
+  const [importedNoticeLabel, setImportedNoticeLabel] = useState<string>("SPECIFICATION IMPORTED FROM NITHBYTE AI");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -55,44 +58,159 @@ function ContactFormContent() {
         const detail = e.detail;
         setFormData((prev) => ({
           ...prev,
-          projectType: detail.projectType || prev.projectType,
-          projectStage: detail.projectStage || prev.projectStage,
+          projectType: detail.projectType && PROJECT_TYPES.includes(detail.projectType) ? detail.projectType : prev.projectType,
+          projectStage: detail.projectStage && PROJECT_STAGES.includes(detail.projectStage) ? detail.projectStage : prev.projectStage,
+          budget: detail.budget && BUDGET_RANGES.includes(detail.budget) ? detail.budget : prev.budget,
           description: detail.description || prev.description,
         }));
+        setImportedNoticeLabel("SPECIFICATION IMPORTED FROM NITHBYTE AI");
         setHasImportedBrief(true);
+        setTimeout(() => {
+          const card = document.getElementById("contact-main-card");
+          if (card) {
+            card.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 120);
       }
     };
 
     window.addEventListener("nithbyte_apply_brief", handleCustomBriefEvent);
 
     // 2. Check searchParams
+    const paramProduct = searchParams.get("product") || searchParams.get("p");
     const paramType = searchParams.get("type");
+    const paramService = searchParams.get("service") || searchParams.get("s");
+    const paramSolution = searchParams.get("solution");
     const paramStage = searchParams.get("stage");
-    const paramDesc = searchParams.get("description");
+    const paramBudget = searchParams.get("budget");
+    const paramDesc = searchParams.get("description") || searchParams.get("desc");
 
-    // 3. Read sessionStorage / localStorage for cross-page navigation from chatbot
-    let storedBrief: any = null;
-    try {
-      const stored = sessionStorage.getItem("nithbyte_active_project_brief") || localStorage.getItem("nithbyte_active_project_brief");
-      if (stored) {
-        storedBrief = JSON.parse(stored);
+    let resolvedType: string | undefined;
+    let resolvedStage: string | undefined;
+    let resolvedBudget: string | undefined;
+    let resolvedDesc: string | undefined;
+    let bannerLabel: string | null = null;
+
+    // A. Product targeted (e.g. /contact?type=demo&product=mbyte or /contact?product=dinebyte)
+    if (paramProduct) {
+      const product = getProductBySlug(paramProduct.toLowerCase());
+      if (product) {
+        resolvedType = "SaaS / Digital Product";
+        resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : (paramType === "demo" ? "Scaling & Optimization" : "Full Ground-Up Build");
+        resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : "Flexible / Discovery";
+
+        if (paramType === "demo") {
+          resolvedDesc = paramDesc || `We would like to request a live product demonstration of ${product.name} (${product.category}). Please share available demo schedules, licensing models, and deployment details for our business operations.`;
+          bannerLabel = `DEMO REQUEST // ${product.name.toUpperCase()}`;
+        } else {
+          resolvedDesc = paramDesc || `We are interested in licensing or deploying ${product.name} (${product.category}). Please connect us with your solutions team to discuss onboarding, custom workflows, and pricing.`;
+          bannerLabel = `PRODUCT INQUIRY // ${product.name.toUpperCase()}`;
+        }
       }
-    } catch {
-      // ignore
     }
 
-    const resolvedType = paramType || storedBrief?.projectType;
-    const resolvedStage = paramStage || storedBrief?.projectStage;
-    const resolvedDesc = paramDesc || storedBrief?.description;
+    // B. Generic demo without product slug (e.g. /contact?type=demo)
+    if (!bannerLabel && paramType === "demo") {
+      resolvedType = "SaaS / Digital Product";
+      resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : "Scaling & Optimization";
+      resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : "Flexible / Discovery";
+      resolvedDesc = paramDesc || "We would like to request a live platform demonstration of NithByte SaaS products. Please share scheduling options and technical overview.";
+      bannerLabel = "DEMO REQUEST // NITHBYTE PRODUCTS";
+    }
 
-    if (resolvedType || resolvedStage || resolvedDesc) {
+    // C. Products suite inquiry (e.g. /contact?type=products or type=saas)
+    if (!bannerLabel && (paramType === "products" || paramType === "saas")) {
+      resolvedType = "SaaS / Digital Product";
+      resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : "Architecture Planning";
+      resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : "Flexible / Discovery";
+      resolvedDesc = paramDesc || "We would like to discuss deploying or licensing NithByte SaaS digital products for our business operations.";
+      bannerLabel = "PRODUCT SUITE INQUIRY";
+    }
+
+    // D. Service inquiry (e.g. /contact?service=web-development)
+    if (!bannerLabel && paramService) {
+      const sLower = paramService.toLowerCase();
+      const matchedService = SERVICES.find(
+        (s) => s.slug === sLower || s.slug.includes(sLower)
+      );
+
+      if (sLower.includes("web")) {
+        resolvedType = "Web Platform / Next.js";
+      } else if (sLower.includes("mobile") || sLower.includes("app")) {
+        resolvedType = "Mobile Application";
+      } else if (sLower.includes("commerce") || sLower.includes("shop")) {
+        resolvedType = "E-commerce";
+      } else if (sLower.includes("ai") || sLower.includes("auto")) {
+        resolvedType = "AI & Automation";
+      } else if (sLower.includes("saas")) {
+        resolvedType = "SaaS / Digital Product";
+      } else {
+        resolvedType = "Custom Software";
+      }
+
+      resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : "Architecture Planning";
+      resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : "Flexible / Discovery";
+      resolvedDesc = paramDesc || `We are looking for engineering and development expertise in ${matchedService?.title || paramService}. Please share capability details and consultation availability.`;
+      bannerLabel = `SERVICE INQUIRY // ${(matchedService?.title || paramService).toUpperCase()}`;
+    }
+
+    // E. Solution category inquiry (e.g. /contact?solution=fintech)
+    if (!bannerLabel && paramSolution) {
+      resolvedType = "Custom Software";
+      resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : "Early Concept / Idea";
+      resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : "Flexible / Discovery";
+      resolvedDesc = paramDesc || `We are interested in software architecture and implementation for ${paramSolution} solutions.`;
+      bannerLabel = `SOLUTION INQUIRY // ${paramSolution.toUpperCase()}`;
+    }
+
+    // F. Direct projectType match from query param (e.g. /contact?type=Mobile+Application)
+    if (!resolvedType && paramType && PROJECT_TYPES.includes(paramType)) {
+      resolvedType = paramType;
+      resolvedStage = paramStage && PROJECT_STAGES.includes(paramStage) ? paramStage : undefined;
+      resolvedBudget = paramBudget && BUDGET_RANGES.includes(paramBudget) ? paramBudget : undefined;
+      resolvedDesc = paramDesc || undefined;
+      bannerLabel = "INQUIRY BRIEF IMPORTED";
+    }
+
+    // G. Read sessionStorage / localStorage for cross-page navigation from chatbot
+    if (!bannerLabel) {
+      let storedBrief: any = null;
+      try {
+        const stored = sessionStorage.getItem("nithbyte_active_project_brief") || localStorage.getItem("nithbyte_active_project_brief");
+        if (stored) {
+          storedBrief = JSON.parse(stored);
+        }
+      } catch {
+        // ignore
+      }
+
+      if (storedBrief) {
+        resolvedType = storedBrief.projectType && PROJECT_TYPES.includes(storedBrief.projectType) ? storedBrief.projectType : undefined;
+        resolvedStage = storedBrief.projectStage && PROJECT_STAGES.includes(storedBrief.projectStage) ? storedBrief.projectStage : undefined;
+        resolvedBudget = storedBrief.budget && BUDGET_RANGES.includes(storedBrief.budget) ? storedBrief.budget : undefined;
+        resolvedDesc = storedBrief.description || undefined;
+        bannerLabel = "SPECIFICATION IMPORTED FROM NITHBYTE AI";
+      }
+    }
+
+    if (bannerLabel) {
       setFormData((prev) => ({
         ...prev,
-        projectType: resolvedType || prev.projectType,
-        projectStage: resolvedStage || prev.projectStage,
+        projectType: resolvedType && PROJECT_TYPES.includes(resolvedType) ? resolvedType : prev.projectType,
+        projectStage: resolvedStage && PROJECT_STAGES.includes(resolvedStage) ? resolvedStage : prev.projectStage,
+        budget: resolvedBudget && BUDGET_RANGES.includes(resolvedBudget) ? resolvedBudget : prev.budget,
         description: resolvedDesc || prev.description,
       }));
+      setImportedNoticeLabel(bannerLabel);
       setHasImportedBrief(true);
+
+      // Smoothly scroll down so the user immediately sees the pre-filled form
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact-main-card");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 150);
     }
 
     return () => {
@@ -190,23 +308,34 @@ function ContactFormContent() {
             <div id="contact-main-card" className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
               {hasImportedBrief && !isSubmitted && (
                 <div className="p-4 rounded-2xl bg-nb-orange/10 border border-nb-orange/30 flex items-center justify-between gap-3 font-mono-tech text-xs">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 rounded-full bg-nb-orange animate-pulse" />
-                    <span className="font-bold text-nb-orange uppercase tracking-wider">
-                      SPECIFICATION IMPORTED FROM NITHBYTE AI
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-nb-orange animate-pulse shrink-0" />
+                    <span className="font-bold text-nb-orange uppercase tracking-wider truncate">
+                      {importedNoticeLabel}
                     </span>
                   </div>
                   <button
                     type="button"
                     onClick={() => {
                       setHasImportedBrief(false);
+                      setFormData({
+                        name: "",
+                        email: "",
+                        company: "",
+                        country: "",
+                        projectType: "Web Platform / Next.js",
+                        projectStage: "Early Concept / Idea",
+                        budget: "Flexible / Discovery",
+                        description: "",
+                      });
                       try {
                         sessionStorage.removeItem("nithbyte_active_project_brief");
+                        localStorage.removeItem("nithbyte_active_project_brief");
                       } catch {
                         // ignore
                       }
                     }}
-                    className="text-[10px] text-nb-muted hover:text-nb-orange underline font-semibold"
+                    className="text-[10px] text-nb-muted hover:text-nb-orange underline font-semibold shrink-0 cursor-pointer"
                   >
                     Clear imported
                   </button>
@@ -334,11 +463,10 @@ function ContactFormContent() {
                           key={type}
                           type="button"
                           onClick={() => setFormData({ ...formData, projectType: type })}
-                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${
-                            formData.projectType === type
+                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${formData.projectType === type
                               ? "bg-nb-black text-white dark:bg-nb-orange dark:text-white font-bold shadow-md shadow-black/10"
                               : "bg-nb-off-white dark:bg-white/5 text-nb-graphite dark:text-nb-off-white border border-black/10 dark:border-white/10 hover:border-nb-orange/40"
-                          }`}
+                            }`}
                         >
                           {type}
                         </button>
@@ -357,11 +485,10 @@ function ContactFormContent() {
                           key={stage}
                           type="button"
                           onClick={() => setFormData({ ...formData, projectStage: stage })}
-                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${
-                            formData.projectStage === stage
+                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${formData.projectStage === stage
                               ? "bg-nb-black text-white dark:bg-nb-orange dark:text-white font-bold shadow-md shadow-black/10"
                               : "bg-nb-off-white dark:bg-white/5 text-nb-graphite dark:text-nb-off-white border border-black/10 dark:border-white/10 hover:border-nb-orange/40"
-                          }`}
+                            }`}
                         >
                           {stage}
                         </button>
@@ -380,11 +507,10 @@ function ContactFormContent() {
                           key={b}
                           type="button"
                           onClick={() => setFormData({ ...formData, budget: b })}
-                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${
-                            formData.budget === b
+                          className={`px-4 py-2.5 rounded-xl text-xs font-mono-tech transition-colors ${formData.budget === b
                               ? "bg-nb-black text-white dark:bg-nb-orange dark:text-white font-bold shadow-md shadow-black/10"
                               : "bg-nb-off-white dark:bg-white/5 text-nb-graphite dark:text-nb-off-white border border-black/10 dark:border-white/10 hover:border-nb-orange/40"
-                          }`}
+                            }`}
                         >
                           {b}
                         </button>

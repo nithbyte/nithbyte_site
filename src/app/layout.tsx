@@ -32,9 +32,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "NithByte — Where Ideas Find Their Code.",
   description:
-    "NithByte designs and engineers digital products, e-commerce experiences and intelligent technology solutions for modern businesses.",
+    "NithByte designs and engineers digital products, SaaS platforms, e-commerce architectures and intelligent technology solutions for modern businesses.",
   keywords: [
     "Digital Product Engineering",
+    "SaaS Platforms",
     "Web Development",
     "Next.js Development",
     "E-commerce Architecture",
@@ -46,13 +47,27 @@ export const metadata: Metadata = {
   authors: [{ name: "NithByte" }],
   creator: "NithByte",
   metadataBase: new URL("https://nithbyte.com"),
+  alternates: {
+    canonical: "https://nithbyte.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://nithbyte.com",
     title: "NithByte — Where Ideas Find Their Code.",
     description:
-      "NithByte designs and builds digital products, e-commerce experiences and intelligent technology solutions for modern businesses.",
+      "NithByte designs and builds digital products, SaaS platforms, e-commerce architectures and intelligent technology solutions for modern businesses.",
     siteName: "NithByte",
     images: [
       {
@@ -67,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NithByte — Where Ideas Find Their Code.",
     description:
-      "NithByte designs and builds digital products, e-commerce experiences and intelligent technology solutions for modern businesses.",
+      "NithByte designs and builds digital products, SaaS platforms, e-commerce architectures and intelligent technology solutions for modern businesses.",
     images: ["/images/nithbyte-logo.png"],
   },
   icons: {
@@ -81,6 +96,44 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nithbyte.com/#organization",
+      "name": "NithByte",
+      "url": "https://nithbyte.com",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://nithbyte.com/#logo",
+        "url": "https://nithbyte.com/images/nithbyte-logo.png",
+        "caption": "NithByte"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/nithbyte",
+        "https://x.com/nithbyte",
+        "https://github.com/nithbyte"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "url": "https://nithbyte.com/contact"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nithbyte.com/#website",
+      "url": "https://nithbyte.com",
+      "name": "NithByte",
+      "description": "Where Ideas Find Their Code — Digital Product Engineering & Industry-Focused SaaS Platforms",
+      "publisher": {
+        "@id": "https://nithbyte.com/#organization"
+      }
+    }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -92,6 +145,12 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <Script
           id="microsoft-clarity"
           strategy="afterInteractive"

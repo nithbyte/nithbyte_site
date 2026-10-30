@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import IntroSection from "@/components/home/IntroSection";
 import CapabilitiesSection from "@/components/home/CapabilitiesSection";
@@ -12,6 +13,15 @@ import LabsSection from "@/components/home/LabsSection";
 import GlobalReachSection from "@/components/home/GlobalReachSection";
 import InsightsSection from "@/components/home/InsightsSection";
 import FinalCtaSection from "@/components/home/FinalCtaSection";
+
+export const metadata: Metadata = {
+  title: "NithByte — Where Ideas Find Their Code | Digital Product Engineering",
+  description:
+    "NithByte designs and engineers digital products, SaaS platforms, e-commerce architectures, and intelligent technology solutions for modern enterprises.",
+  alternates: {
+    canonical: "https://nithbyte.com",
+  },
+};
 
 export default function HomePage() {
   return (
@@ -49,10 +59,10 @@ export default function HomePage() {
       {/* 11: International Reach & Standards */}
       <GlobalReachSection />
 
-      {/* 12: Engineering Insights */}
+      {/* 12: Engineering Journal & Perspectives */}
       <InsightsSection />
 
-      {/* 13: Final Interactive Idea/Problem/Ambition CTA */}
+      {/* 13: Final Contact CTA */}
       <FinalCtaSection />
     </div>
   );

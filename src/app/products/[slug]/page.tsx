@@ -33,6 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `${product.name} — ${product.tagline} | NithByte`;
   const description = `${product.shortDesc} Built by NithByte for modern enterprises.`;
+  const canonicalUrl = `https://nithbyte.com/products/${product.slug}`;
+  const ogImage = product.gallery.find((g) => g.image)?.image || "/images/nithbyte-logo.png";
 
   return {
     title,
@@ -44,20 +46,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Enterprise Software",
       product.appType,
       "Business Management Platform",
+      "Cloud ERP",
+      "B2B SaaS",
     ],
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: `https://nithbyte.com/products/${product.slug}`,
+      url: canonicalUrl,
       title,
       description,
       siteName: "NithByte Products",
       images: [
         {
-          url: "/images/nithbyte-logo.png",
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${product.name} — NithByte SaaS Platform`,
+          alt: `${product.name} — ${product.tagline}`,
         },
       ],
     },
@@ -65,10 +69,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/nithbyte-logo.png"],
+      images: [ogImage],
     },
     alternates: {
-      canonical: `https://nithbyte.com/products/${product.slug}`,
+      canonical: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }
@@ -80,37 +95,86 @@ export default function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  // Schema.org structured data for SoftwareApplication
-  const jsonLd = {
+  // Schema.org structured data graph (BreadcrumbList + SoftwareApplication + FAQPage)
+  const structuredDataGraph = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: product.name,
-    operatingSystem: "Web, iOS, Android",
-    applicationCategory: "BusinessApplication",
-    description: product.shortDesc,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "NithByte",
-        url: "https://nithbyte.com",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nithbyte.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products",
+            "item": "https://nithbyte.com/products",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": product.name,
+            "item": `https://nithbyte.com/products/${product.slug}`,
+          },
+        ],
       },
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "NithByte",
-      url: "https://nithbyte.com",
-    },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `https://nithbyte.com/products/${product.slug}#software`,
+        "name": product.name,
+        "operatingSystem": "Web, iOS, Android",
+        "applicationCategory": product.category,
+        "description": product.fullDesc,
+        "url": `https://nithbyte.com/products/${product.slug}`,
+        "screenshot": product.gallery
+          .filter((g) => g.image)
+          .map((g) => `https://nithbyte.com${g.image}`),
+        "featureList": product.modules.flatMap((m) => m.features),
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "NithByte",
+            "url": "https://nithbyte.com",
+          },
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://nithbyte.com/#organization",
+          "name": "NithByte",
+          "url": "https://nithbyte.com",
+        },
+      },
+      ...(product.faqs && product.faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "mainEntity": product.faqs.map((f) => ({
+                "@type": "Question",
+                "name": f.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": f.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
     <div className="w-full flex flex-col space-y-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataGraph) }}
       />
 
       {/* 01: Product Hero */}

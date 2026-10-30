@@ -8,6 +8,13 @@ import { Terminal, Sparkles, Code2, Users } from "lucide-react";
 export const metadata: Metadata = {
   title: "Careers — NithByte",
   description: "Join the engineering team at NithByte. Where Ideas Find Their Code.",
+  alternates: {
+    canonical: "https://nithbyte.com/careers",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function CareersPage() {
@@ -28,44 +35,55 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Growth Positioning & Open Applications */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 shadow-sm space-y-8">
-          <div className="flex items-center gap-3">
-            <OrangeSignal variant="pulse" label="TEAM SCALING STATUS" />
-          </div>
-
-          <div className="space-y-4 max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
-              We&apos;re growing. New opportunities will appear here.
-            </h2>
-            <p className="text-base text-nb-graphite dark:text-nb-muted leading-relaxed">
-              While we may not have an active opening for every specific role right now, we are always eager to connect with exceptional frontend engineers, system architects, and AI developers.
+      {/* Values & Open Roles */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-4">
+            <div className="w-10 h-10 rounded-xl bg-nb-orange/15 text-nb-orange flex items-center justify-center">
+              <Code2 className="w-5 h-5" />
+            </div>
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Ship High Quality</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+              We care about component architecture, type safety, bundle sizes, and micro-interactions. Done right beats done quickly.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-black/5 dark:border-white/10 font-mono-tech text-xs">
-            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
-              <span className="text-nb-orange font-bold">FRONTEND ENGINEERING</span>
-              <p className="text-nb-graphite/80 dark:text-nb-muted">Next.js, TypeScript, GSAP, Framer Motion, Design Systems</p>
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-4">
+            <div className="w-10 h-10 rounded-xl bg-nb-orange/15 text-nb-orange flex items-center justify-center">
+              <Users className="w-5 h-5" />
             </div>
-            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
-              <span className="text-nb-orange font-bold">BACKEND & CLOUD</span>
-              <p className="text-nb-graphite/80 dark:text-nb-muted">NestJS, PostgreSQL, Redis, Docker, Microservices</p>
-            </div>
-            <div className="p-4 rounded-xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
-              <span className="text-nb-orange font-bold">AI & AUTOMATION</span>
-              <p className="text-nb-graphite/80 dark:text-nb-muted">LLMs, Vector Search, LangChain, Python, Workflow Automation</p>
-            </div>
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Autonomy & Agency</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+              Engineers own problems end-to-end. You talk directly with technical decision-makers and shape technical roadmaps.
+            </p>
           </div>
 
-          <div className="pt-4 flex items-center gap-4">
-            <a
-              href="mailto:nithbyte@gmail.com?subject=Spontaneous%20Application%20—%20Engineering"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-black dark:bg-nb-orange text-white font-mono-tech text-xs font-bold hover:bg-nb-orange dark:hover:bg-nb-deep-orange transition-colors"
-            >
-              Send Spontaneous Profile / GitHub →
-            </a>
+          <div className="p-8 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-4">
+            <div className="w-10 h-10 rounded-xl bg-nb-orange/15 text-nb-orange flex items-center justify-center">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h3 className="text-xl font-bold text-nb-black dark:text-nb-white">Continuous Evolution</h3>
+            <p className="text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+              We constantly integrate modern tooling—from Next.js Server Components and edge computing to practical AI architectures.
+            </p>
+          </div>
+        </div>
+
+        {/* Speculative Application Callout */}
+        <div className="p-8 sm:p-12 rounded-3xl bg-nb-black text-nb-off-white text-center space-y-6">
+          <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase tracking-wider">
+            OPEN POSITIONS & SPECULATIVE APPLICATIONS
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-nb-white">
+            We are always interested in exceptional builders.
+          </h2>
+          <p className="text-sm sm:text-base text-nb-muted max-w-xl mx-auto">
+            Whether you specialize in Next.js, full-stack TypeScript, React Native, or systems architecture, introduce yourself.
+          </p>
+          <div className="flex justify-center pt-2">
+            <MagneticButton href="mailto:careers@nithbyte.com" variant="primary" size="lg" cursorLabel="APPLY">
+              careers@nithbyte.com
+            </MagneticButton>
           </div>
         </div>
       </section>

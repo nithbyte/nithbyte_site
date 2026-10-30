@@ -10,12 +10,91 @@ import ServiceArchitectureVisualizer from "@/components/visuals/services/Service
 
 export const metadata: Metadata = {
   title: "Services & Capabilities — NithByte",
-  description: "Comprehensive software engineering, mobile development, e-commerce, AI automation, and growth marketing capabilities.",
+  description:
+    "Comprehensive software engineering, mobile development, e-commerce architecture, AI automation, and growth marketing capabilities.",
+  alternates: {
+    canonical: "https://nithbyte.com/services",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nithbyte.com/services",
+    title: "Services & Capabilities — NithByte",
+    description:
+      "Comprehensive software engineering, mobile development, e-commerce architecture, AI automation, and growth marketing capabilities.",
+    siteName: "NithByte",
+    images: [
+      {
+        url: "/images/nithbyte-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "NithByte Services & Capabilities",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services & Capabilities — NithByte",
+    description:
+      "Comprehensive software engineering, mobile development, e-commerce architecture, AI automation, and growth marketing capabilities.",
+    images: ["/images/nithbyte-logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nithbyte.com",
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://nithbyte.com/services",
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://nithbyte.com/services/#itemlist",
+      "name": "NithByte Technical Engineering Services",
+      "itemListElement": SERVICES.map((service, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Service",
+          "name": service.title,
+          "description": service.shortDesc,
+          "url": `https://nithbyte.com/services/${service.slug}`,
+          "provider": {
+            "@type": "Organization",
+            "name": "NithByte",
+            "url": "https://nithbyte.com",
+          },
+        },
+      })),
+    },
+  ],
 };
 
 export default function ServicesPage() {
   return (
     <div className="pt-32 pb-24 space-y-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
       {/* Hero Section */}
       <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
         <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">

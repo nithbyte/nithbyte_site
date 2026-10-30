@@ -21,9 +21,51 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = INSIGHTS.find((a) => a.slug === params.slug);
   if (!article) return { title: "Insight Not Found" };
 
+  const canonicalUrl = `https://nithbyte.com/insights/${article.slug}`;
+  const title = `${article.title} — NithByte Insights`;
+  const description = article.excerpt;
+
   return {
-    title: `${article.title} — NithByte Insights`,
-    description: article.excerpt,
+    title,
+    description,
+    keywords: [
+      article.category,
+      ...article.tags,
+      "Software Engineering",
+      "NithByte Insights",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "article",
+      locale: "en_US",
+      url: canonicalUrl,
+      title,
+      description,
+      siteName: "NithByte Insights",
+      publishedTime: article.publishedAt,
+      authors: [article.author],
+      tags: article.tags,
+      images: [
+        {
+          url: "/images/nithbyte-logo.png",
+          width: 1200,
+          height: 630,
+          alt: `${article.title} — NithByte Insights`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/nithbyte-logo.png"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -34,8 +76,64 @@ export default function InsightArticlePage({ params }: Props) {
     notFound();
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nithbyte.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Insights",
+            "item": "https://nithbyte.com/insights",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": article.title,
+            "item": `https://nithbyte.com/insights/${article.slug}`,
+          },
+        ],
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": `https://nithbyte.com/insights/${article.slug}#article`,
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": article.publishedAt,
+        "author": {
+          "@type": "Organization",
+          "name": article.author,
+          "url": "https://nithbyte.com",
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "NithByte",
+          "url": "https://nithbyte.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://nithbyte.com/images/nithbyte-logo.png",
+          },
+        },
+        "keywords": article.tags.join(", "),
+        "articleSection": article.category,
+      },
+    ],
+  };
+
   return (
     <article className="pt-32 pb-24 space-y-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Header */}
       <section className="max-w-4xl mx-auto px-6 sm:px-8 space-y-8">
         <div className="flex items-center gap-4">
@@ -72,7 +170,7 @@ export default function InsightArticlePage({ params }: Props) {
 
       {/* Article Body */}
       <section className="max-w-3xl mx-auto px-6 sm:px-8 space-y-10 text-base sm:text-lg text-nb-graphite/90 dark:text-nb-off-white/90 leading-relaxed">
-        {article.content.map((section, idx) => (
+        {article.content.map((section) => (
           <div key={section.heading} className="space-y-6">
             <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight pt-4">
               {section.heading}

@@ -23,9 +23,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = SERVICES.find((s) => s.slug === params.slug);
   if (!service) return { title: "Service Not Found" };
 
+  const canonicalUrl = `https://nithbyte.com/services/${service.slug}`;
+  const title = `${service.title} — NithByte Capabilities`;
+  const description = service.shortDesc;
+
   return {
-    title: `${service.title} — NithByte Capabilities`,
-    description: service.shortDesc,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: canonicalUrl,
+      title,
+      description,
+      siteName: "NithByte Services",
+      images: [
+        {
+          url: "/images/nithbyte-logo.png",
+          width: 1200,
+          height: 630,
+          alt: `${service.title} — NithByte`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/nithbyte-logo.png"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -36,8 +69,65 @@ export default function ServiceDetailPage({ params }: Props) {
     notFound();
   }
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nithbyte.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://nithbyte.com/services",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": service.title,
+            "item": `https://nithbyte.com/services/${service.slug}`,
+          },
+        ],
+      },
+      {
+        "@type": "Service",
+        "@id": `https://nithbyte.com/services/${service.slug}#service`,
+        "name": service.title,
+        "description": service.fullDesc,
+        "provider": {
+          "@type": "Organization",
+          "name": "NithByte",
+          "url": "https://nithbyte.com",
+        },
+        "areaServed": "Global",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": `${service.title} Capabilities`,
+          "itemListElement": service.capabilities.map((c) => ({
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": c.name,
+              "description": c.description,
+            },
+          })),
+        },
+      },
+    ],
+  };
+
   return (
     <div className="pt-32 pb-24 space-y-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       {/* Hero */}
       <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
         <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">

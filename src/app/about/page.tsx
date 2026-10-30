@@ -10,40 +10,112 @@ import { CheckCircle2, ArrowUpRight, ShieldCheck, Terminal, Cpu, Sparkles } from
 
 export const metadata: Metadata = {
   title: "About — NithByte",
-  description: "An independent digital product and software engineering company building high-performance web, commerce, and intelligent systems.",
+  description:
+    "An independent digital product and software engineering company building high-performance web, commerce, SaaS, and intelligent systems.",
+  alternates: {
+    canonical: "https://nithbyte.com/about",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nithbyte.com/about",
+    title: "About — NithByte",
+    description:
+      "An independent digital product and software engineering company building high-performance web, commerce, SaaS, and intelligent systems.",
+    siteName: "NithByte",
+    images: [
+      {
+        url: "/images/nithbyte-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "About NithByte",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — NithByte",
+    description:
+      "An independent digital product and software engineering company building high-performance web, commerce, SaaS, and intelligent systems.",
+    images: ["/images/nithbyte-logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const aboutJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nithbyte.com",
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About",
+          "item": "https://nithbyte.com/about",
+        },
+      ],
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://nithbyte.com/about/#webpage",
+      "url": "https://nithbyte.com/about",
+      "name": "About NithByte",
+      "description":
+        "An independent digital product and software engineering company building high-performance web, commerce, SaaS, and intelligent systems.",
+    },
+  ],
 };
 
 const PILLARS = [
   {
     number: "01",
     title: "Think Deeply",
-    description: "We deconstruct problem domains down to first principles before proposing solutions. Superficial assumptions lead to technical debt; deep inquiry leads to elegant systems."
+    description:
+      "We deconstruct problem domains down to first principles before proposing solutions. Superficial assumptions lead to technical debt; deep inquiry leads to elegant systems.",
   },
   {
     number: "02",
     title: "Design Intentionally",
-    description: "Every pixel, spacing unit, and font size must have a distinct functional reason to exist. We reject decorative bloat in favor of tactile ergonomics and clarity."
+    description:
+      "Every pixel, spacing unit, and font size must have a distinct functional reason to exist. We reject decorative bloat in favor of tactile ergonomics and clarity.",
   },
   {
     number: "03",
     title: "Engineer Carefully",
-    description: "Type safety, sub-second latency, and decoupled component architecture form the bedrock of our software. We write code designed to be read, maintained, and scaled."
+    description:
+      "Type safety, sub-second latency, and decoupled component architecture form the bedrock of our software. We write code designed to be read, maintained, and scaled.",
   },
   {
     number: "04",
     title: "Use AI Meaningfully",
-    description: "Artificial intelligence should eliminate repetitive manual friction and synthesize knowledge—not generate generic fluff. We embed machine intelligence with strict guardrails."
+    description:
+      "Artificial intelligence should eliminate repetitive manual friction and synthesize knowledge—not generate generic fluff. We embed machine intelligence with strict guardrails.",
   },
   {
     number: "05",
     title: "Build for Evolution",
-    description: "Software is not a static artifact. We architect systems with modular primitives that allow teams to pivot, scale, and integrate new capabilities without rebuilding from scratch."
-  }
+    description:
+      "Software is not a static artifact. We architect systems with modular primitives that allow teams to pivot, scale, and integrate new capabilities without rebuilding from scratch.",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <div className="pt-32 pb-24 space-y-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       {/* Hero Section */}
       <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
         <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">
@@ -78,10 +150,13 @@ export default function AboutPage() {
             <p>
               We operate at the intersection of full-stack engineering, tactile product design, and practical machine intelligence. Our work spans custom web applications, mobile platforms, headless commerce infrastructure, and autonomous workflow pipelines.
             </p>
-            <div className="p-6 rounded-2xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 font-mono-tech text-xs space-y-2">
-              <span className="text-nb-orange font-bold">CORE IDENTITY</span>
-              <p className="text-nb-graphite dark:text-nb-off-white">
-                &quot;NITH&quot; represents unified technical leadership. &quot;BYTE&quot; represents digital computing and software systems. Together, NithByte is where ideas find their code.
+            <div className="p-6 rounded-2xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 space-y-3 font-mono-tech text-xs">
+              <div className="flex items-center gap-2 text-nb-orange font-bold">
+                <OrangeSignal variant="pulse" />
+                <span>NITHBYTE CORE THESIS</span>
+              </div>
+              <p className="text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+                Great software is not measured by lines of code or transient marketing trends, but by operational stability, speed of iteration, and tangible business value delivered over years of deployment.
               </p>
             </div>
           </div>

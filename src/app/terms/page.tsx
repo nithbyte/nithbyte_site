@@ -5,6 +5,13 @@ import SignalBadge from "@/components/ui/SignalBadge";
 export const metadata: Metadata = {
   title: "Terms of Service — NithByte",
   description: "Terms of service and usage conditions for the NithByte website.",
+  alternates: {
+    canonical: "https://nithbyte.com/terms",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsPage() {
@@ -24,31 +31,28 @@ export default function TermsPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using the NithByte website, you agree to comply with and be bound by these Terms of Service. If you do not agree, please discontinue use of this site.
+            By accessing and utilizing the NithByte website and associated digital services, you agree to comply with and be bound by these terms. If you do not accept these terms, you should refrain from using our platforms.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">2. Intellectual Property</h2>
           <p>
-            All content, brand assets, code samples, designs, and interactive visual systems displayed on this website are the property of NithByte and are protected by applicable international intellectual property laws.
+            All original software architectures, code demonstrations, visual blueprints, trademarks, and editorial analyses displayed on this site are the intellectual property of NithByte, protected under international copyright and intellectual property conventions.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">3. Project Engagements</h2>
+          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">3. Client Engagements & Software Delivery</h2>
           <p>
-            Any client engineering engagement, deliverables, timelines, and commercial terms are governed by specific, formal statement-of-work (SOW) agreements entered into separately between NithByte and the client.
+            Commercial deliverables, source code rights, maintenance guarantees, and service level agreements (SLAs) are governed exclusively by formal Statements of Work (SOW) executed between NithByte and each client organization.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">4. Contact & Inquiries</h2>
+          <h2 className="text-xl font-bold text-nb-black dark:text-nb-white font-display">4. Modifications to Terms</h2>
           <p>
-            For inquiries regarding our terms, please contact us at{" "}
-            <a href="mailto:nithbyte@gmail.com" className="text-nb-orange font-bold hover:underline">
-              nithbyte@gmail.com
-            </a>.
+            NithByte reserves the right to modify these terms periodically. Continued interaction with our digital platforms following updates constitutes affirmative acceptance of the revised terms.
           </p>
         </section>
       </div>

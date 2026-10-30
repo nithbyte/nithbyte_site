@@ -7,7 +7,7 @@ import { PRODUCTS } from "@/data/products";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nithbyte.com";
 
-  // Static routes
+  // Static routes (canonical only, no redirects)
   const staticRoutes = [
     "",
     "/about",
@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/solutions",
     "/work",
     "/products",
-    "/labs",
     "/insights",
     "/contact",
     "/careers",

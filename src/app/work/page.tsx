@@ -9,12 +9,86 @@ import { ArrowUpRight, Lock, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Work & Case Studies — NithByte",
-  description: "Explore our real-world engineering case studies, active client deployments, and upcoming product platforms.",
+  description:
+    "Explore our real-world engineering case studies, active client deployments, and upcoming product platforms.",
+  alternates: {
+    canonical: "https://nithbyte.com/work",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nithbyte.com/work",
+    title: "Work & Case Studies — NithByte",
+    description:
+      "Explore our real-world engineering case studies, active client deployments, and upcoming product platforms.",
+    siteName: "NithByte",
+    images: [
+      {
+        url: "/images/nithbyte-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "NithByte Work & Case Studies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Work & Case Studies — NithByte",
+    description:
+      "Explore our real-world engineering case studies, active client deployments, and upcoming product platforms.",
+    images: ["/images/nithbyte-logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const workJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nithbyte.com",
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Work",
+          "item": "https://nithbyte.com/work",
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://nithbyte.com/work/#itemlist",
+      "name": "NithByte Portfolio & Case Studies",
+      "itemListElement": PROJECTS.map((project, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "CreativeWork",
+          "name": project.title,
+          "description": project.summary,
+          "url": `https://nithbyte.com/work/${project.slug}`,
+        },
+      })),
+    },
+  ],
 };
 
 export default function WorkPage() {
   return (
     <div className="pt-32 pb-24 space-y-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(workJsonLd) }}
+      />
       {/* Hero */}
       <section className="w-full max-w-7xl mx-auto px-6 sm:px-8">
         <div className="w-full border-b border-black/10 dark:border-white/10 pb-16">
@@ -38,90 +112,73 @@ export default function WorkPage() {
             className="p-8 sm:p-12 rounded-3xl bg-nb-white dark:bg-nb-soft-black border border-black/10 dark:border-white/10 hover:border-nb-orange/40 transition-all shadow-sm space-y-8"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 dark:border-white/10 pb-6">
-              <div className="flex items-center gap-3 font-mono-tech text-xs">
-                <span className="text-xl text-nb-orange font-bold">0{idx + 1}</span>
-                <span className="px-3 py-1 rounded-full bg-nb-off-white dark:bg-white/10 border border-black/10 dark:border-white/10 font-semibold uppercase text-nb-black dark:text-nb-off-white">
+              <div className="flex items-center gap-3">
+                <span className="text-xl font-mono-tech text-nb-orange font-bold">
+                  0{idx + 1}
+                </span>
+                <span className="px-3 py-1 rounded-full bg-nb-off-white dark:bg-white/10 border border-black/10 dark:border-white/10 font-mono-tech text-xs text-nb-graphite dark:text-nb-off-white font-semibold uppercase">
                   {project.category}
                 </span>
+                <span className="text-xs font-mono-tech text-nb-muted">
+                  {project.year}
+                </span>
               </div>
-              <div className="flex items-center gap-3">
-                {project.isLive ? (
-                  <span className="inline-flex items-center gap-2 font-mono-tech text-xs text-green-600 dark:text-green-400 font-bold">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    LIVE PRODUCTION
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 font-mono-tech text-xs text-nb-orange">
-                    <Lock className="w-3.5 h-3.5" />
-                    ACTIVE DEVELOPMENT
-                  </span>
-                )}
-              </div>
+
+              {project.isLive ? (
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-orange font-bold hover:underline"
+                >
+                  View Case Study <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-muted">
+                  <Lock className="w-3.5 h-3.5" /> Architecture Under NDA
+                </span>
+              )}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-              <div className="lg:col-span-7 space-y-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-nb-black dark:text-nb-white tracking-tight">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-6 space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-nb-black dark:text-nb-white tracking-tight">
                   {project.title}
                 </h2>
-                <p className="text-base sm:text-lg text-nb-orange font-medium">
+                <p className="text-base text-nb-orange font-mono-tech">
                   {project.tagline}
                 </p>
                 <p className="text-sm sm:text-base text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
                   {project.summary}
                 </p>
 
-                <div className="pt-4 flex flex-wrap gap-4">
-                  <MagneticButton
-                    href={`/work/${project.slug}`}
-                    variant="primary"
-                    size="md"
-                    cursorLabel="EXPLORE ↗"
-                  >
-                    Explore Case Study
-                  </MagneticButton>
-                  {project.url && (
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 dark:border-white/20 text-nb-black dark:text-nb-off-white font-mono-tech text-xs hover:border-nb-orange hover:text-nb-orange transition-colors"
+                <div className="pt-2 flex flex-wrap gap-2 font-mono-tech text-xs">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded-md bg-nb-off-white dark:bg-white/5 text-nb-black dark:text-nb-off-white border border-black/5 dark:border-white/5"
                     >
-                      Visit Destination <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              <div className="lg:col-span-5 p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-4 font-mono-tech text-xs">
-                <span className="text-nb-muted uppercase tracking-wider block">
-                  TECHNICAL ATTRIBUTES
-                </span>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between py-1.5 border-b border-black/5 dark:border-white/5">
-                    <span className="text-nb-muted">CLIENT</span>
-                    <span className="text-nb-black dark:text-nb-off-white font-bold">{project.client}</span>
-                  </div>
-                  <div className="flex items-center justify-between py-1.5 border-b border-black/5 dark:border-white/5">
-                    <span className="text-nb-muted">RELEASE</span>
-                    <span className="text-nb-black dark:text-nb-off-white font-bold">{project.year}</span>
-                  </div>
-                  <div className="flex items-center justify-between py-1.5 border-b border-black/5 dark:border-white/5">
-                    <span className="text-nb-muted">STACK</span>
-                    <span className="text-nb-black dark:text-nb-off-white font-bold">{project.techStack.join(" • ")}</span>
-                  </div>
+              <div className="lg:col-span-6 space-y-4">
+                <div className="p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2">
+                  <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase">
+                    THE CHALLENGE
+                  </span>
+                  <p className="text-xs sm:text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+                    {project.challenge}
+                  </p>
                 </div>
 
-                <div className="pt-2">
-                  <span className="text-nb-muted text-[10px] uppercase block mb-1.5">HIGHLIGHTS:</span>
-                  <ul className="space-y-1 text-nb-graphite dark:text-nb-muted">
-                    {project.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-nb-orange" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="p-6 rounded-2xl bg-nb-off-white dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-2">
+                  <span className="text-xs font-mono-tech text-nb-orange font-bold uppercase">
+                    THE ENGINEERING
+                  </span>
+                  <p className="text-xs sm:text-sm text-nb-graphite/80 dark:text-nb-muted leading-relaxed">
+                    {project.engineering}
+                  </p>
                 </div>
               </div>
             </div>
@@ -129,11 +186,14 @@ export default function WorkPage() {
         ))}
       </section>
 
-      {/* CTA */}
+      {/* Call to Action */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 text-center space-y-6">
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-nb-black dark:text-nb-white">
-          Have an upcoming project to engineer?
+          Have a vision for your next platform?
         </h2>
+        <p className="text-base sm:text-lg text-nb-muted max-w-xl mx-auto">
+          We partner with founders and enterprises to engineer market-defining products.
+        </p>
         <div className="flex justify-center pt-2">
           <MagneticButton href="/contact" variant="primary" size="lg" cursorLabel="LET'S BUILD">
             Start a Project

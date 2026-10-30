@@ -59,11 +59,79 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://nithbyte.com/products",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const productsJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nithbyte.com",
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://nithbyte.com/products",
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://nithbyte.com/products/#itemlist",
+      "name": "NithByte SaaS Products & Enterprise Platforms",
+      "description":
+        "Purpose-built digital platforms designed to solve real business challenges across multiple industries.",
+      "itemListElement": PRODUCTS.map((product, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": product.name,
+          "url": `https://nithbyte.com/products/${product.slug}`,
+          "applicationCategory": product.category,
+          "description": product.shortDesc,
+          "operatingSystem": "Web, iOS, Android",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "NithByte",
+              "url": "https://nithbyte.com",
+            },
+          },
+        },
+      })),
+    },
+  ],
 };
 
 export default function ProductsPage() {
   return (
     <div className="w-full flex flex-col pt-32 pb-24 space-y-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productsJsonLd) }}
+      />
       {/* =========================================================================
           SECTION 1 – HERO SECTION
          ========================================================================= */}
