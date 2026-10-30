@@ -54,8 +54,10 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "py-3 bg-nb-off-white/95 dark:bg-nb-black/95 border-b border-black/5 dark:border-white/10 shadow-sm backdrop-blur-md"
-            : "py-6 bg-transparent"
+            ? "py-3 bg-nb-off-white/95 dark:bg-nb-black/95 border-b border-black/5 dark:border-white/10 shadow-sm backdrop-blur-md opacity-100 pointer-events-auto"
+            : pathname === "/"
+              ? "opacity-0 pointer-events-none"
+              : "py-6 bg-transparent opacity-100 pointer-events-auto"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">

@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        ipad: "768px",
+        "desktop-sm": "1280px",
+      },
       colors: {
         "nb-orange": "#FF6A00",
         "nb-deep-orange": "#D94F00",
