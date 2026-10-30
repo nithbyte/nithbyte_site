@@ -6,7 +6,7 @@ import React, { useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Facebook, Instagram } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import FluidTrail from "@/components/originkit/ui/hero-11/fluid-trail";
@@ -312,31 +312,22 @@ export function LiquidDistortionHero({
 
         <div className="flex items-center gap-3 pt-1">
           <a
-            aria-label="X / Twitter"
-            className="ok-h11-social"
-            href="https://x.com"
+            aria-label="NithByte on Facebook"
+            className="ok-h11-social group hover:border-nb-orange hover:bg-white/10 transition-colors"
+            href="https://www.facebook.com/profile.php?id=61594737716582"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img alt="" height={17} src={asset("x.svg")} width={17} />
+            <Facebook className="w-3.5 h-3.5 text-white/90 group-hover:text-nb-orange transition-colors" />
           </a>
           <a
-            aria-label="LinkedIn"
-            className="ok-h11-social"
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img alt="" height={17} src={asset("linkedin.svg")} width={17} />
-          </a>
-          <a
-            aria-label="Instagram"
-            className="ok-h11-social"
+            aria-label="NithByte on Instagram"
+            className="ok-h11-social group hover:border-nb-orange hover:bg-white/10 transition-colors"
             href="https://www.instagram.com/nithbyte_official"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img alt="" height={17} src={asset("instagram.svg")} width={17} />
+            <Instagram className="w-3.5 h-3.5 text-white/90 group-hover:text-nb-orange transition-colors" />
           </a>
         </div>
       </aside>
