@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import IntroSection from "@/components/home/IntroSection";
+import ClientsSection from "@/components/home/ClientsSection";
 import CapabilitiesSection from "@/components/home/CapabilitiesSection";
 import SolutionBuilderSection from "@/components/home/SolutionBuilderSection";
 import MethodSection from "@/components/home/MethodSection";
@@ -33,7 +34,10 @@ export default function HomePage() {
       {/* 02: Editorial Intro with Orange Signal */}
       <IntroSection />
 
-      {/* 03: Interactive Capabilities (BUILD, CONNECT, SELL, GROW, INTELLIGENCE) */}
+      {/* 03: Client Network 3D Ecosystem Carousel */}
+      <ClientsSection />
+
+      {/* 04: Interactive Capabilities (BUILD, CONNECT, SELL, GROW, INTELLIGENCE) */}
       <CapabilitiesSection />
 
       {/* 04: Interactive Solution Synthesizer */}
