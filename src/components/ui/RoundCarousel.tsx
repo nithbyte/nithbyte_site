@@ -8,6 +8,8 @@ import React, { useEffect, useRef } from "react";
 export interface RoundCarouselImage {
   src: string;
   alt?: string;
+  name?: string;
+  category?: string;
 }
 
 export interface RoundCarouselProps {
@@ -123,8 +125,9 @@ function __OriginkitBase_RoundCarousel({
     borderRadius: radiusPx,
     overflow: "hidden",
     backfaceVisibility: "hidden",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
@@ -164,6 +167,7 @@ function __OriginkitBase_RoundCarousel({
         >
           {items.map((img, i) => {
             const src = img?.src;
+            const indexLabel = String((i % 5) + 1).padStart(2, "0");
             return (
               <div
                 key={i}
@@ -174,25 +178,153 @@ function __OriginkitBase_RoundCarousel({
                   transformStyle: "preserve-3d",
                 }}
               >
+                {/* Front Face: High-tech glassmorphic client card */}
                 <div
                   style={{
                     ...faceBase,
-                    backgroundColor: src ? "transparent" : "#222",
-                    backgroundImage: src ? `url(${src})` : undefined,
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.45)",
+                    background: "linear-gradient(135deg, rgba(22, 22, 26, 0.96) 0%, rgba(12, 12, 15, 0.98) 100%)",
+                    boxShadow: "0 14px 34px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12)",
                     border: "1px solid rgba(255,255,255,0.12)",
+                    padding: "16px 20px",
+                    userSelect: "none",
                   }}
-                />
+                >
+                  {/* Subtle Top-Right Telemetry Pip */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 8,
+                      right: 12,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                      opacity: 0.6,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 5,
+                        height: 5,
+                        borderRadius: "50%",
+                        backgroundColor: "#FF4D00",
+                        display: "inline-block",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontFamily: "var(--font-mono-tech, monospace)",
+                        color: "#A1A1AA",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      P-{indexLabel}
+                    </span>
+                  </div>
+
+                  {/* Centered Client Logo */}
+                  {src ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        paddingBottom: img?.name ? 14 : 0,
+                      }}
+                    >
+                      <img
+                        src={src}
+                        alt={img?.alt || img?.name || "Client Partner"}
+                        draggable={false}
+                        style={{
+                          maxWidth: "88%",
+                          maxHeight: "76%",
+                          width: "auto",
+                          height: "auto",
+                          objectFit: "contain",
+                          filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.45))",
+                          pointerEvents: "none",
+                        }}
+                      />
+                    </div>
+                  ) : null}
+
+                  {/* Bottom Metadata Bar */}
+                  {img?.name ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 7,
+                        left: 12,
+                        right: 12,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontSize: 10,
+                        fontFamily: "var(--font-mono-tech, monospace)",
+                        color: "#8E8E93",
+                        borderTop: "1px solid rgba(255,255,255,0.06)",
+                        paddingTop: 4,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontWeight: 600,
+                          color: "#EDEDED",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {img.name}
+                      </span>
+                      {img.category ? (
+                        <span
+                          style={{
+                            fontSize: 9,
+                            color: "#A1A1AA",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {img.category}
+                        </span>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+
+                {/* Back Face (Inside Cylinder Ring) */}
                 <div
                   style={{
                     ...faceBase,
                     transform: "rotateY(180deg)",
-                    backgroundColor: src ? "transparent" : "#181818",
-                    backgroundImage: src ? `url(${src})` : undefined,
-                    filter: `brightness(${innerDim / 10})`,
+                    background: "rgba(10, 10, 14, 0.96)",
                     border: "1px solid rgba(255,255,255,0.06)",
+                    filter: `brightness(${innerDim / 10})`,
+                    padding: "16px 20px",
+                    userSelect: "none",
                   }}
-                />
+                >
+                  {src ? (
+                    <img
+                      src={src}
+                      alt=""
+                      draggable={false}
+                      style={{
+                        maxWidth: "75%",
+                        maxHeight: "60%",
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "contain",
+                        opacity: 0.25,
+                        filter: "grayscale(100%)",
+                        pointerEvents: "none",
+                      }}
+                    />
+                  ) : null}
+                </div>
               </div>
             );
           })}
@@ -203,8 +335,8 @@ function __OriginkitBase_RoundCarousel({
 }
 
 const __originkitPresetProps = {
-  imageWidth: 338,
-  imageHeight: 149,
+  imageWidth: 340,
+  imageHeight: 156,
   speed: 4,
   tilt: -6,
   cornerRadius: 14,

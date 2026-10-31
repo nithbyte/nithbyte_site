@@ -6,12 +6,79 @@ import RoundCarousel, { RoundCarouselImage } from "../ui/RoundCarousel";
 import { Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+const DEFAULT_CLIENTS: RoundCarouselImage[] = [
+  {
+    name: "Kovel Designs",
+    category: "Architecture & Atelier",
+    src: "/images/clients/kovel-designs-trimmed.png",
+    alt: "Kovel Designs — Architecture & Interior Design",
+  },
+  {
+    name: "Manamm",
+    category: "Fine Dining & Hospitality",
+    src: "/images/clients/manamm.png",
+    alt: "Manamm — Culinary Enterprise",
+  },
+  {
+    name: "Suma Beauty Care",
+    category: "Herbal Salon & Wellness",
+    src: "/images/clients/suma-beautycare-trimmed.png",
+    alt: "Suma Herbal Beauty Care",
+  },
+  {
+    name: "iStudy Hub",
+    category: "EdTech & Learning Platform",
+    src: "/images/clients/istudyhub.png",
+    alt: "iStudy Hub — Modern Learning Platform",
+  },
+  {
+    name: "Suma Hair Elixir",
+    category: "D2C Organic Haircare",
+    src: "/images/clients/suma-hair-elixir-trimmed.png",
+    alt: "Suma Hair Elixir — Herbal Formulation",
+  },
+  // Seamless loop to form a smooth 10-cylinder rotation ring
+  {
+    name: "Kovel Designs",
+    category: "Architecture & Atelier",
+    src: "/images/clients/kovel-designs-trimmed.png",
+    alt: "Kovel Designs — Architecture & Interior Design",
+  },
+  {
+    name: "Manamm",
+    category: "Fine Dining & Hospitality",
+    src: "/images/clients/manamm.png",
+    alt: "Manamm — Culinary Enterprise",
+  },
+  {
+    name: "Suma Beauty Care",
+    category: "Herbal Salon & Wellness",
+    src: "/images/clients/suma-beautycare-trimmed.png",
+    alt: "Suma Herbal Beauty Care",
+  },
+  {
+    name: "iStudy Hub",
+    category: "EdTech & Learning Platform",
+    src: "/images/clients/istudyhub.png",
+    alt: "iStudy Hub — Modern Learning Platform",
+  },
+  {
+    name: "Suma Hair Elixir",
+    category: "D2C Organic Haircare",
+    src: "/images/clients/suma-hair-elixir-trimmed.png",
+    alt: "Suma Hair Elixir — Herbal Formulation",
+  },
+];
+
 interface ClientsSectionProps {
   className?: string;
   images?: RoundCarouselImage[];
 }
 
-export default function ClientsSection({ className = "", images }: ClientsSectionProps) {
+export default function ClientsSection({
+  className = "",
+  images = DEFAULT_CLIENTS,
+}: ClientsSectionProps) {
   return (
     <section
       className={`py-20 sm:py-28 bg-nb-black text-nb-off-white relative border-b border-white/10 overflow-hidden ${className}`}
@@ -41,7 +108,7 @@ export default function ClientsSection({ className = "", images }: ClientsSectio
       </div>
 
       {/* 3D Round Carousel Viewport with Fade Overlays */}
-      <div className="relative w-full h-[360px] sm:h-[420px] overflow-hidden">
+      <div className="relative w-full h-[400px] sm:h-[460px] overflow-hidden">
         {/* Left Edge Gradient Fade */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-nb-black via-nb-black/80 to-transparent z-20" />
 
