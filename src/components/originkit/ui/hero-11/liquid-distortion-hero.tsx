@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, Facebook, Instagram } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import { ProductsNavDropdown, MobileProductsAccordion } from "@/components/navigation/ProductsNavDropdown";
 import FluidTrail from "@/components/originkit/ui/hero-11/fluid-trail";
 import LiquidHover from "@/components/originkit/ui/hero-11/liquid-hover";
 
@@ -157,6 +158,16 @@ export function LiquidDistortionHero({
         {/* Center: Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-7 text-[15px] font-mono-tech tracking-wider" aria-label="Main navigation">
           {NAV_LINKS.map((item) => {
+            if (item.name === "Products") {
+              return (
+                <ProductsNavDropdown
+                  key={item.name}
+                  variant="dark"
+                  layoutId="hero-active-nav-line"
+                />
+              );
+            }
+
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));
@@ -234,28 +245,40 @@ export function LiquidDistortionHero({
                 </button>
               </div>
               <div className="space-y-4">
-                {NAV_LINKS.map((link, idx) => (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 + 0.1 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group flex items-center justify-between py-2 border-b border-white/10 text-2xl font-bold tracking-tight text-nb-off-white hover:text-nb-orange transition-colors"
+                {NAV_LINKS.map((link, idx) => {
+                  if (link.name === "Products") {
+                    return (
+                      <MobileProductsAccordion
+                        key={link.name}
+                        number={link.number}
+                        onNavigate={() => setMobileMenuOpen(false)}
+                      />
+                    );
+                  }
+
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 + 0.1 }}
                     >
-                      <span className="flex items-center gap-4">
-                        <span className="text-xs font-mono-tech text-nb-muted group-hover:text-nb-orange">
-                          {link.number}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="group flex items-center justify-between py-2 border-b border-white/10 text-2xl font-bold tracking-tight text-nb-off-white hover:text-nb-orange transition-colors"
+                      >
+                        <span className="flex items-center gap-4">
+                          <span className="text-xs font-mono-tech text-nb-muted group-hover:text-nb-orange">
+                            {link.number}
+                          </span>
+                          {link.name}
                         </span>
-                        {link.name}
-                      </span>
-                      <ArrowUpRight className="w-5 h-5 text-nb-muted group-hover:text-nb-orange group-hover:translate-x-1 transition-all" />
-                    </Link>
-                  </motion.div>
-                ))}
+                        <ArrowUpRight className="w-5 h-5 text-nb-muted group-hover:text-nb-orange group-hover:translate-x-1 transition-all" />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 

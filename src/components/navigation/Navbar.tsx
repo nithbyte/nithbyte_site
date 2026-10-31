@@ -8,6 +8,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import Logo from "../ui/Logo";
 import MagneticButton from "../interactions/MagneticButton";
 import ThemeToggle from "../theme/ThemeToggle";
+import { ProductsNavDropdown, MobileProductsAccordion } from "./ProductsNavDropdown";
 
 const NAV_LINKS = [
   { name: "About", href: "/about", number: "01" },
@@ -69,6 +70,16 @@ export default function Navbar() {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-mono-tech tracking-wider">
             {NAV_LINKS.map((link) => {
+              if (link.name === "Products") {
+                return (
+                  <ProductsNavDropdown
+                    key={link.name}
+                    variant="auto"
+                    layoutId="nav-indicator"
+                  />
+                );
+              }
+
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
@@ -135,28 +146,40 @@ export default function Navbar() {
                 <ThemeToggle size="sm" />
               </div>
               <div className="space-y-4">
-                {NAV_LINKS.map((link, idx) => (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 + 0.1 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group flex items-center justify-between py-2 border-b border-white/10 text-2xl font-bold tracking-tight text-nb-off-white hover:text-nb-orange transition-colors"
+                {NAV_LINKS.map((link, idx) => {
+                  if (link.name === "Products") {
+                    return (
+                      <MobileProductsAccordion
+                        key={link.name}
+                        number={link.number}
+                        onNavigate={() => setMobileMenuOpen(false)}
+                      />
+                    );
+                  }
+
+                  return (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 + 0.1 }}
                     >
-                      <span className="flex items-center gap-4">
-                        <span className="text-xs font-mono-tech text-nb-muted group-hover:text-nb-orange">
-                          {link.number}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="group flex items-center justify-between py-2 border-b border-white/10 text-2xl font-bold tracking-tight text-nb-off-white hover:text-nb-orange transition-colors"
+                      >
+                        <span className="flex items-center gap-4">
+                          <span className="text-xs font-mono-tech text-nb-muted group-hover:text-nb-orange">
+                            {link.number}
+                          </span>
+                          {link.name}
                         </span>
-                        {link.name}
-                      </span>
-                      <ArrowUpRight className="w-5 h-5 text-nb-muted group-hover:text-nb-orange group-hover:translate-x-1 transition-all" />
-                    </Link>
-                  </motion.div>
-                ))}
+                        <ArrowUpRight className="w-5 h-5 text-nb-muted group-hover:text-nb-orange group-hover:translate-x-1 transition-all" />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 
