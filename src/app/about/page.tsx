@@ -6,6 +6,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import MagneticButton from "@/components/interactions/MagneticButton";
 import OrangeSignal from "@/components/interactions/OrangeSignal";
 import PhilosophyFlowDiagram from "@/components/visuals/about/PhilosophyFlowDiagram";
+import PartnershipSection from "@/components/home/PartnershipSection";
 import { CheckCircle2, ArrowUpRight, ShieldCheck, Terminal, Cpu, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -230,6 +231,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Strategic Alliance: NithByte × Kovel Designs */}
+      <PartnershipSection className="border-y border-white/10" />
 
       {/* Call to Action */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 text-center space-y-6">

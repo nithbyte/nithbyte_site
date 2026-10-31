@@ -9,6 +9,7 @@ import BlueprintSection from "@/components/home/BlueprintSection";
 import FeaturedWorkSection from "@/components/home/FeaturedWorkSection";
 import DnaSection from "@/components/home/DnaSection";
 import TechStackSection from "@/components/home/TechStackSection";
+import PartnershipSection from "@/components/home/PartnershipSection";
 import LabsSection from "@/components/home/LabsSection";
 import GlobalReachSection from "@/components/home/GlobalReachSection";
 import InsightsSection from "@/components/home/InsightsSection";
@@ -56,13 +57,16 @@ export default function HomePage() {
       {/* 10: Technology Ecosystem Stack */}
       <TechStackSection />
 
-      {/* 11: International Reach & Standards */}
+      {/* 11: Strategic Alliance (NithByte × Kovel Designs) */}
+      <PartnershipSection />
+
+      {/* 12: International Reach & Standards */}
       <GlobalReachSection />
 
-      {/* 12: Engineering Journal & Perspectives */}
+      {/* 13: Engineering Journal & Perspectives */}
       <InsightsSection />
 
-      {/* 13: Final Contact CTA */}
+      {/* 14: Final Contact CTA */}
       <FinalCtaSection />
     </div>
   );
