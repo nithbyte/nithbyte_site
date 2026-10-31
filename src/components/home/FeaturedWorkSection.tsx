@@ -16,7 +16,7 @@ export default function FeaturedWorkSection() {
           <SectionHeader
             badgeLabel="SELECTED WORK"
             badgeTag="CASE STUDIES"
-            title="Digital products engineered with intent."
+            title="Digital services engineered with intent."
             description="Explore our recent deployments and active client engineering architectures."
             className="mb-0 md:mb-0"
           />
