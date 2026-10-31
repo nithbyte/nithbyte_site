@@ -149,7 +149,7 @@ export function LiquidDistortionHero({
         <FluidTrail />
       </div>
 
-      <header className="ok-h11-header">
+      <header className="ok-h11-header !z-30">
         {/* Left: NithByte Logo */}
         <div className="flex items-center">
           <Logo variant="white" />

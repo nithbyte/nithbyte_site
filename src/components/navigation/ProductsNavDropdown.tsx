@@ -77,7 +77,7 @@ export function ProductsNavDropdown({
 
   return (
     <div
-      className="relative"
+      className={`relative ${isOpen ? "z-50" : "z-20"}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -125,7 +125,7 @@ export function ProductsNavDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[340px] z-50 pointer-events-auto"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[340px] z-[100] pointer-events-auto"
           >
             <div
               className={`rounded-2xl p-2.5 shadow-2xl backdrop-blur-2xl border ${
