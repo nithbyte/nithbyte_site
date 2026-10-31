@@ -98,12 +98,12 @@ export default function ClientsSection({
       </div>
 
       {/* 3D Round Carousel Viewport with Fade Overlays */}
-      <div className="relative w-full h-[320px] sm:h-[360px] -mt-2 sm:-mt-4 overflow-hidden">
+      <div className="relative w-full h-[350px] sm:h-[400px] -mt-2 sm:-mt-4 overflow-hidden">
         {/* Left Edge Gradient Fade */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-nb-black via-nb-black/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-nb-black via-nb-black/70 to-transparent z-20" />
 
         {/* Right Edge Gradient Fade */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-nb-black via-nb-black/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-nb-black via-nb-black/70 to-transparent z-20" />
 
         {/* The Carousel */}
         <div className="w-full h-full relative z-10">

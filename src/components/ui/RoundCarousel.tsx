@@ -241,9 +241,9 @@ function __OriginkitBase_RoundCarousel({
 }
 
 const __originkitPresetProps = {
-  imageWidth: 260,
-  imageHeight: 130,
-  spacing: 2.2,
+  imageWidth: 340,
+  imageHeight: 150,
+  spacing: 2.4,
   speed: 3.5,
   tilt: -4,
   cornerRadius: 8,
