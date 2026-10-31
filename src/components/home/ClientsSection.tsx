@@ -8,6 +8,12 @@ import Link from "next/link";
 
 const DEFAULT_CLIENTS: RoundCarouselImage[] = [
   {
+    name: "ALPS Cafe",
+    category: "Specialty Cafe & Roastery",
+    src: "/images/clients/alps-cafe-trimmed.png",
+    alt: "ALPS Cafe — Brew, Bite, Belong",
+  },
+  {
     name: "Kovel Designs",
     category: "Architecture & Atelier",
     src: "/images/clients/kovel-designs-trimmed.png",
@@ -37,7 +43,13 @@ const DEFAULT_CLIENTS: RoundCarouselImage[] = [
     src: "/images/clients/suma-hair-elixir-trimmed.png",
     alt: "Suma Hair Elixir — Herbal Formulation",
   },
-  // Seamless loop to form a smooth 10-cylinder rotation ring
+  // Seamless loop to form a smooth 12-item 3D cylindrical rotation ring
+  {
+    name: "ALPS Cafe",
+    category: "Specialty Cafe & Roastery",
+    src: "/images/clients/alps-cafe-trimmed.png",
+    alt: "ALPS Cafe — Brew, Bite, Belong",
+  },
   {
     name: "Kovel Designs",
     category: "Architecture & Atelier",
@@ -99,7 +111,7 @@ export default function ClientsSection({
       </div>
 
       {/* 3D Round Carousel Viewport with Fade Overlays */}
-      <div className="relative w-full h-[380px] sm:h-[430px] -mt-2 sm:-mt-4 overflow-hidden">
+      <div className="relative w-full h-[320px] sm:h-[360px] -mt-2 sm:-mt-4 overflow-hidden">
         {/* Left Edge Gradient Fade */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-nb-black via-nb-black/80 to-transparent z-20" />
 

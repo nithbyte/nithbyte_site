@@ -123,11 +123,13 @@ function __OriginkitBase_RoundCarousel({
     position: "absolute",
     inset: 0,
     borderRadius: radiusPx,
-    overflow: "hidden",
+    overflow: "visible",
     backfaceVisibility: "hidden",
+    WebkitBackfaceVisibility: "hidden",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    background: "transparent",
   };
 
   return (
@@ -167,7 +169,6 @@ function __OriginkitBase_RoundCarousel({
         >
           {items.map((img, i) => {
             const src = img?.src;
-            const indexLabel = String((i % 5) + 1).padStart(2, "0");
             return (
               <div
                 key={i}
@@ -178,132 +179,38 @@ function __OriginkitBase_RoundCarousel({
                   transformStyle: "preserve-3d",
                 }}
               >
-                {/* Front Face: High-tech glassmorphic client card */}
+                {/* Front Face: Pure floating client logo */}
                 <div
                   style={{
                     ...faceBase,
-                    background: "linear-gradient(135deg, rgba(22, 22, 26, 0.96) 0%, rgba(12, 12, 15, 0.98) 100%)",
-                    boxShadow: "0 14px 34px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    padding: "16px 20px",
                     userSelect: "none",
                   }}
                 >
-                  {/* Subtle Top-Right Telemetry Pip */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 8,
-                      right: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 5,
-                      opacity: 0.6,
-                    }}
-                  >
-                    <span
+                  {src ? (
+                    <img
+                      src={src}
+                      alt={img?.alt || img?.name || "Client Partner"}
+                      draggable={false}
                       style={{
-                        width: 5,
-                        height: 5,
-                        borderRadius: "50%",
-                        backgroundColor: "#FF4D00",
-                        display: "inline-block",
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "contain",
+                        filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.8)) drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
+                        pointerEvents: "none",
                       }}
                     />
-                    <span
-                      style={{
-                        fontSize: 9,
-                        fontFamily: "var(--font-mono-tech, monospace)",
-                        color: "#A1A1AA",
-                        letterSpacing: "0.08em",
-                      }}
-                    >
-                      P-{indexLabel}
-                    </span>
-                  </div>
-
-                  {/* Centered Client Logo */}
-                  {src ? (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        paddingBottom: img?.name ? 14 : 0,
-                      }}
-                    >
-                      <img
-                        src={src}
-                        alt={img?.alt || img?.name || "Client Partner"}
-                        draggable={false}
-                        style={{
-                          maxWidth: "88%",
-                          maxHeight: "76%",
-                          width: "auto",
-                          height: "auto",
-                          objectFit: "contain",
-                          filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.45))",
-                          pointerEvents: "none",
-                        }}
-                      />
-                    </div>
-                  ) : null}
-
-                  {/* Bottom Metadata Bar */}
-                  {img?.name ? (
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 7,
-                        left: 12,
-                        right: 12,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        fontSize: 10,
-                        fontFamily: "var(--font-mono-tech, monospace)",
-                        color: "#8E8E93",
-                        borderTop: "1px solid rgba(255,255,255,0.06)",
-                        paddingTop: 4,
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontWeight: 600,
-                          color: "#EDEDED",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {img.name}
-                      </span>
-                      {img.category ? (
-                        <span
-                          style={{
-                            fontSize: 9,
-                            color: "#A1A1AA",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {img.category}
-                        </span>
-                      ) : null}
-                    </div>
                   ) : null}
                 </div>
 
-                {/* Back Face (Inside Cylinder Ring) */}
+                {/* Back Face (Inside Cylinder Ring, dimmed silhouette) */}
                 <div
                   style={{
                     ...faceBase,
                     transform: "rotateY(180deg)",
-                    background: "rgba(10, 10, 14, 0.96)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    opacity: 0.2,
                     filter: `brightness(${innerDim / 10})`,
-                    padding: "16px 20px",
                     userSelect: "none",
                   }}
                 >
@@ -313,12 +220,11 @@ function __OriginkitBase_RoundCarousel({
                       alt=""
                       draggable={false}
                       style={{
-                        maxWidth: "75%",
-                        maxHeight: "60%",
+                        maxWidth: "85%",
+                        maxHeight: "85%",
                         width: "auto",
                         height: "auto",
                         objectFit: "contain",
-                        opacity: 0.25,
                         filter: "grayscale(100%)",
                         pointerEvents: "none",
                       }}
@@ -335,11 +241,12 @@ function __OriginkitBase_RoundCarousel({
 }
 
 const __originkitPresetProps = {
-  imageWidth: 340,
-  imageHeight: 156,
-  speed: 4,
-  tilt: -6,
-  cornerRadius: 14,
+  imageWidth: 260,
+  imageHeight: 130,
+  spacing: 2.2,
+  speed: 3.5,
+  tilt: -4,
+  cornerRadius: 8,
   innerDim: 2,
   sensitivity: 3,
 };
