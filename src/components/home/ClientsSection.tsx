@@ -26,6 +26,12 @@ const DEFAULT_CLIENTS: RoundCarouselImage[] = [
     alt: "Manamm — Culinary Enterprise",
   },
   {
+    name: "Ze Bancairo",
+    category: "School of Banking & FinTech",
+    src: "/images/clients/ze-bancairo.png",
+    alt: "Ze Bancairo School of Banking",
+  },
+  {
     name: "Suma Beauty Care",
     category: "Herbal Salon & Wellness",
     src: "/images/clients/suma-beautycare-trimmed.png",
