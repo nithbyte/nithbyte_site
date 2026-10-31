@@ -44,17 +44,17 @@ export default function HomePage() {
       {/* 06: Blueprint to Reality (ALPS Cafe Nagercoil) */}
       <BlueprintSection />
 
-      {/* 07: Featured Work & Case Studies */}
+      {/* 07: NithByte Products (SaaS Platforms) */}
+      <LabsSection />
+
+      {/* 08: Featured Work & Case Studies */}
       <FeaturedWorkSection />
 
-      {/* 08: Interconnected NithByte DNA */}
+      {/* 09: Interconnected NithByte DNA */}
       <DnaSection />
 
-      {/* 09: Technology Ecosystem Stack */}
+      {/* 10: Technology Ecosystem Stack */}
       <TechStackSection />
-
-      {/* 10: NithByte Labs Preview (Commerce & Intelligence) */}
-      <LabsSection />
 
       {/* 11: International Reach & Standards */}
       <GlobalReachSection />
