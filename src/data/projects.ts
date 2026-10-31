@@ -52,30 +52,32 @@ export const PROJECTS: ProjectItem[] = [
     ]
   },
   {
-    id: "project-02",
-    slug: "coming-soon-02",
-    title: "Project 02 — Enterprise Platform",
-    category: "Custom Software & Cloud Systems",
-    year: "2025",
-    client: "Coming Soon",
-    isLive: false,
-    tagline: "High-throughput operational platform currently in development.",
-    summary: "A bespoke cloud platform engineered for distributed workflows, real-time telemetry, and modular data management.",
-    challenge: "Unifying multi-branch operational data into a single, low-latency interface.",
-    approach: "Domain-driven design with reactive state synchronization.",
-    engineering: "Microservices architecture utilizing event-driven pipelines and strict type safety.",
-    techStack: ["Next.js", "NestJS", "PostgreSQL", "Docker", "Redis"],
+    id: "suma-beautycare",
+    slug: "suma-beautycare-nagercoil",
+    title: "Suma Beauty Care",
+    category: "Web Engineering & Brand Experience",
+    year: "2024",
+    client: "Suma Beauty Care",
+    url: "https://mediumpurple-aardvark-804356.hostingersite.com/",
+    isLive: true,
+    tagline: "Modern herbal beauty atelier and digital treatment destination in Nagercoil.",
+    summary: "A modern, editorial digital experience crafted for Suma Beauty Care in Nagercoil, combining modern botanical aesthetic storytelling, an interactive 65+ treatment ritual catalog, bridal artistry showcases, and frictionless customer booking pathways.",
+    challenge: "Translate 16+ years of personalized herbal skincare, bridal craftsmanship, and holistic beauty rituals led by Dr. V. Lekshmi into an intimate, ultra-responsive digital atelier that highlights signature treatments and simplifies client discovery.",
+    approach: "Designed an editorial luxury aesthetic with organic herbal tones, interactive treatment exploration, structured service pricing, and seamless direct consultation routes across mobile and desktop devices.",
+    engineering: "Constructed with modern frontend architecture to ensure sub-second page delivery, lightweight asset loading, structured schema data for local search visibility, and smooth micro-interactions.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "SEO Optimization"],
     features: [
-      "Real-time event streaming",
-      "Role-based multi-tier security",
-      "Custom reporting engine"
+      "Interactive 65+ herbal treatment & bridal ritual catalog",
+      "Editorial brand storytelling & practitioner philosophy spotlight",
+      "Direct WhatsApp and telephone appointment booking pathways",
+      "Optimized Core Web Vitals and local Nagercoil SEO indexing"
     ],
     blueprintSteps: [
-      { stage: "01 GRID", title: "Schema Definition", details: "Entity mapping and relational integrity constraints." },
-      { stage: "02 WIREFRAME", title: "Workflow Modeling", details: "End-to-end task execution trees." },
-      { stage: "03 DESIGN", title: "System Dashboard", details: "High-density information hierarchy." },
-      { stage: "04 CODE", title: "Service Integration", details: "Resilient API endpoints and caching layers." },
-      { stage: "05 PRODUCT", title: "Staging Release", details: "Active test harness and performance profiling." }
+      { stage: "01 GRID", title: "Organic Hierarchy", details: "Defining responsive typographic scale, spacing tokens, and warm botanical palette." },
+      { stage: "02 WIREFRAME", title: "Ritual & Treatment Flow", details: "Streamlining navigation across bridal makeup, herbal facials, and booking." },
+      { stage: "03 DESIGN", title: "Quiet Luxury Aesthetic", details: "Balancing curated photography with clean, modern typography and pricing tiers." },
+      { stage: "04 CODE", title: "Component Architecture", details: "Crafting lightweight, reusable UI modules with smooth transitions." },
+      { stage: "05 PRODUCT", title: "Production Deployment", details: "Live deployment on high-speed global edge network." }
     ]
   },
   {

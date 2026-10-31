@@ -125,12 +125,24 @@ export default function WorkPage() {
               </div>
 
               {project.isLive ? (
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-orange font-bold hover:underline"
-                >
-                  View Case Study <ArrowUpRight className="w-4 h-4" />
-                </Link>
+                <div className="flex items-center gap-4">
+                  <Link
+                    href={`/work/${project.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-orange font-bold hover:underline"
+                  >
+                    View Case Study <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-graphite/70 dark:text-nb-muted hover:text-nb-orange transition-colors"
+                    >
+                      Visit Live <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
               ) : (
                 <span className="inline-flex items-center gap-1.5 text-xs font-mono-tech text-nb-muted">
                   <Lock className="w-3.5 h-3.5" /> Architecture Under NDA
