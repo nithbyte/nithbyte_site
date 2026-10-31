@@ -7,6 +7,7 @@ import React, { useEffect, useRef } from "react";
 
 export interface RoundCarouselImage {
   src: string;
+  srcDark?: string;
   alt?: string;
   name?: string;
   category?: string;
@@ -187,20 +188,57 @@ function __OriginkitBase_RoundCarousel({
                   }}
                 >
                   {src ? (
-                    <img
-                      src={src}
-                      alt={img?.alt || img?.name || "Client Partner"}
-                      draggable={false}
-                      style={{
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                        width: "auto",
-                        height: "auto",
-                        objectFit: "contain",
-                        filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.8)) drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
-                        pointerEvents: "none",
-                      }}
-                    />
+                    <>
+                      {img?.srcDark ? (
+                        <>
+                          <img
+                            src={src}
+                            alt={img?.alt || img?.name || "Client Partner"}
+                            draggable={false}
+                            className="block dark:hidden"
+                            style={{
+                              maxWidth: "100%",
+                              maxHeight: "100%",
+                              width: "auto",
+                              height: "auto",
+                              objectFit: "contain",
+                              filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.12))",
+                              pointerEvents: "none",
+                            }}
+                          />
+                          <img
+                            src={img.srcDark}
+                            alt={img?.alt || img?.name || "Client Partner"}
+                            draggable={false}
+                            className="hidden dark:block"
+                            style={{
+                              maxWidth: "100%",
+                              maxHeight: "100%",
+                              width: "auto",
+                              height: "auto",
+                              objectFit: "contain",
+                              filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.8)) drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
+                              pointerEvents: "none",
+                            }}
+                          />
+                        </>
+                      ) : (
+                        <img
+                          src={src}
+                          alt={img?.alt || img?.name || "Client Partner"}
+                          draggable={false}
+                          className="filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_10px_24px_rgba(0,0,0,0.8)]"
+                          style={{
+                            maxWidth: "100%",
+                            maxHeight: "100%",
+                            width: "auto",
+                            height: "auto",
+                            objectFit: "contain",
+                            pointerEvents: "none",
+                          }}
+                        />
+                      )}
+                    </>
                   ) : null}
                 </div>
 
@@ -209,26 +247,63 @@ function __OriginkitBase_RoundCarousel({
                   style={{
                     ...faceBase,
                     transform: "rotateY(180deg)",
-                    opacity: 0.2,
+                    opacity: 0.18,
                     filter: `brightness(${innerDim / 10})`,
                     userSelect: "none",
                   }}
                 >
                   {src ? (
-                    <img
-                      src={src}
-                      alt=""
-                      draggable={false}
-                      style={{
-                        maxWidth: "85%",
-                        maxHeight: "85%",
-                        width: "auto",
-                        height: "auto",
-                        objectFit: "contain",
-                        filter: "grayscale(100%)",
-                        pointerEvents: "none",
-                      }}
-                    />
+                    <>
+                      {img?.srcDark ? (
+                        <>
+                          <img
+                            src={src}
+                            alt=""
+                            draggable={false}
+                            className="block dark:hidden"
+                            style={{
+                              maxWidth: "85%",
+                              maxHeight: "85%",
+                              width: "auto",
+                              height: "auto",
+                              objectFit: "contain",
+                              filter: "grayscale(100%) opacity(40%)",
+                              pointerEvents: "none",
+                            }}
+                          />
+                          <img
+                            src={img.srcDark}
+                            alt=""
+                            draggable={false}
+                            className="hidden dark:block"
+                            style={{
+                              maxWidth: "85%",
+                              maxHeight: "85%",
+                              width: "auto",
+                              height: "auto",
+                              objectFit: "contain",
+                              filter: "grayscale(100%)",
+                              pointerEvents: "none",
+                            }}
+                          />
+                        </>
+                      ) : (
+                        <img
+                          src={src}
+                          alt=""
+                          draggable={false}
+                          style={{
+                            maxWidth: "85%",
+                            maxHeight: "85%",
+                            width: "auto",
+                            height: "auto",
+                            objectFit: "contain",
+                            filter: "grayscale(100%)",
+                            pointerEvents: "none",
+                          }}
+                        />
+                      )}
+                    </>
                   ) : null}
                 </div>
               </div>
