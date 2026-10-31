@@ -131,81 +131,84 @@ export default function CapabilitiesSection() {
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-nb-orange/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-              {/* Left Column: Details */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono-tech text-nb-orange">
-                  <span>CAPABILITY DOMAIN</span>
-                  <span>{"//"}</span>
-                  <span className="text-white font-bold">{activeCap.tag}</span>
+            <div className="space-y-8 relative z-10">
+              {/* Top Row: Left Details & Right System Architecture Nodes */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                {/* Left Column: Details */}
+                <div className="lg:col-span-6 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono-tech text-nb-orange">
+                    <span>CAPABILITY DOMAIN</span>
+                    <span>{"//"}</span>
+                    <span className="text-white font-bold">{activeCap.tag}</span>
+                  </div>
+
+                  <h3 className="text-3xl sm:text-4xl font-bold text-nb-white tracking-tight leading-tight">
+                    {activeCap.title}
+                  </h3>
+
+                  <p className="text-base sm:text-lg text-nb-muted leading-relaxed">
+                    {activeCap.details}
+                  </p>
+
+                  {/* Tech Specs */}
+                  <div className="pt-2 border-t border-white/10 flex flex-wrap gap-3 font-mono-tech text-xs">
+                    {activeCap.techSpecs.map((spec) => (
+                      <div key={spec} className="flex items-center gap-2 text-nb-off-white bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-nb-orange" />
+                        <span>{spec}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-2">
+                    <Link
+                      href={`/services/${activeCap.serviceSlug}`}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-orange text-white font-mono-tech text-sm font-semibold hover:bg-nb-deep-orange transition-colors shadow-lg shadow-nb-orange/20"
+                    >
+                      Deep Dive Capability <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
 
-                <h3 className="text-3xl sm:text-4xl font-bold text-nb-white tracking-tight leading-tight">
-                  {activeCap.title}
-                </h3>
-
-                <p className="text-base sm:text-lg text-nb-muted leading-relaxed">
-                  {activeCap.details}
-                </p>
-
-                {/* Tech Specs */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap gap-4 font-mono-tech text-xs">
-                  {activeCap.techSpecs.map((spec) => (
-                    <div key={spec} className="flex items-center gap-2 text-nb-off-white bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-nb-orange" />
-                      <span>{spec}</span>
+                {/* Right Column: System Architecture Nodes */}
+                <div className="lg:col-span-6">
+                  <div className="p-6 rounded-2xl bg-nb-soft-black border border-white/10 space-y-4">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-3 font-mono-tech text-xs text-nb-muted">
+                      <span className="flex items-center gap-2">
+                        <Terminal className="w-4 h-4 text-nb-orange" />
+                        SYSTEM ARCHITECTURE NODES
+                      </span>
+                      <span className="text-nb-orange">{activeCap.nodes.length} ACTIVE PIPELINES</span>
                     </div>
-                  ))}
-                </div>
 
-                <div className="pt-4">
-                  <Link
-                    href={`/services/${activeCap.serviceSlug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-nb-orange text-white font-mono-tech text-sm font-semibold hover:bg-nb-deep-orange transition-colors shadow-lg shadow-nb-orange/20"
-                  >
-                    Deep Dive Capability <ArrowUpRight className="w-4 h-4" />
-                  </Link>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {activeCap.nodes.map((node, i) => (
+                        <motion.div
+                          key={node}
+                          initial={{ opacity: 0, x: 10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                          className="p-3 rounded-xl bg-white/5 border border-white/5 hover:border-nb-orange/40 transition-colors flex items-center justify-between group"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className="text-[11px] font-mono-tech text-nb-orange font-bold">
+                              0{i + 1}
+                            </span>
+                            <span className="text-xs font-medium text-nb-off-white group-hover:text-nb-white truncate">
+                              {node}
+                            </span>
+                          </div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-nb-orange flex-shrink-0 animate-pulse" />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Interactive Node Map */}
-              <div className="lg:col-span-6 space-y-4">
-                <div className="p-6 rounded-2xl bg-nb-soft-black border border-white/10 space-y-4">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3 font-mono-tech text-xs text-nb-muted">
-                    <span className="flex items-center gap-2">
-                      <Terminal className="w-4 h-4 text-nb-orange" />
-                      SYSTEM ARCHITECTURE NODES
-                    </span>
-                    <span className="text-nb-orange">{activeCap.nodes.length} ACTIVE PIPELINES</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {activeCap.nodes.map((node, i) => (
-                      <motion.div
-                        key={node}
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        className="p-3 rounded-xl bg-white/5 border border-white/5 hover:border-nb-orange/40 transition-colors flex items-center justify-between group"
-                      >
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="text-[11px] font-mono-tech text-nb-orange font-bold">
-                            0{i + 1}
-                          </span>
-                          <span className="text-xs font-medium text-nb-off-white group-hover:text-nb-white truncate">
-                            {node}
-                          </span>
-                        </div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-nb-orange flex-shrink-0 animate-pulse" />
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Live Architecture Visualizer Component */}
-                <div className="mt-4">
-                  <ServiceArchitectureVisualizer slug={activeCap.serviceSlug} />
-                </div>
+              {/* Bottom Row: Full-width Interactive System Blueprint */}
+              <div className="w-full pt-2 [&>div]:my-0">
+                <ServiceArchitectureVisualizer slug={activeCap.serviceSlug} />
               </div>
             </div>
           </motion.div>
