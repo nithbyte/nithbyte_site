@@ -1,0 +1,121 @@
+# ----------------------------------------------------------------------
+# | NithByte Production Apache / LiteSpeed Configuration (.htaccess)   |
+# ----------------------------------------------------------------------
+
+# 1. CHARACTER ENCODING
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .xml .json .rss .svg
+
+# 2. SECURITY HEADERS
+<IfModule mod_headers.c>
+    # Protect against clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+    # Enable browser XSS filtering
+    Header set X-XSS-Protection "1; mode=block"
+    # Strict referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Permissions Policy
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# 3. DISABLE DIRECTORY BROWSING & PROTECT SENSITIVE FILES
+Options -Indexes
+<FilesMatch "^\.(env|git|lock|yml|yaml|md|config)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 4. REWRITE ENGINE & ROUTING
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Enforce HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Legacy Redirects (aligned with next.config.mjs)
+    RewriteRule ^labs(/.*)?$ /products [R=301,L]
+
+    # If the requested path is an existing file or directory, serve it directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Clean URLs for static HTML exports: /about -> /about.html
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+    # Directory index fallback: /about/ -> /about/index.html
+    RewriteCond %{REQUEST_DOCUMENT_ROOT}/$1/index.html -f
+    RewriteRule ^(.*)/?$ $1/index.html [L]
+</IfModule>
+
+# 5. ERROR DOCUMENTS
+ErrorDocument 404 /404.html
+
+# 6. GZIP / DEFLATE COMPRESSION
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# 7. BROWSER CACHING (EXPIRES HEADERS)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # HTML & Data — revalidate quickly
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/json "access plus 0 seconds"
+
+    # Next.js static assets (_next/static) are hashed and immutable
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    # Media & Images
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+</IfModule>
+
+# 8. MIME TYPES
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType image/svg+xml .svg .svgz
+    AddType font/woff2 .woff2
+    AddType font/woff .woff
+    AddType application/manifest+json .webmanifest
+</IfModule>
