@@ -119,3 +119,4 @@ ErrorDocument 404 /404.html
     AddType font/woff .woff
     AddType application/manifest+json .webmanifest
 </IfModule>
+
